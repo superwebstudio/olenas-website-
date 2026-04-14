@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
-import { ArrowRight, Clock, Sparkles } from 'lucide-react';
+import { ArrowRight, Clock } from 'lucide-react';
 import olenaImg from '@/images/olena.png';
 
 function FadeIn({ children, delay = 0, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) {
@@ -31,7 +31,6 @@ const categories = [
     id: 'laser',
     label: 'Laser Hair Removal',
     accent: '#2D6A4F',
-    icon: '✦',
     headline: 'Smooth, Lasting Results',
     intro: 'Our medical-grade laser technology targets hair follicles precisely, delivering permanent hair reduction safely on all skin tones. Say goodbye to razors and waxing.',
     treatments: [
@@ -46,7 +45,6 @@ const categories = [
     id: 'rejuvenation',
     label: 'Skin Rejuvenation',
     accent: '#40916C',
-    icon: '◈',
     headline: 'Restore Your Radiance',
     intro: 'Advanced skin treatments designed to address texture, tone, pigmentation and signs of ageing — revealing a brighter, more youthful complexion.',
     treatments: [
@@ -61,7 +59,6 @@ const categories = [
     id: 'facials',
     label: 'Facial Treatments',
     accent: '#C9A84C',
-    icon: '❋',
     headline: 'Personalised Skin Care',
     intro: 'Bespoke facial protocols designed around your exact skin type and concerns. From deep cleansing to anti-ageing, every facial is uniquely tailored.',
     treatments: [
@@ -76,7 +73,6 @@ const categories = [
     id: 'brow',
     label: 'Brow & Lash',
     accent: '#7A7370',
-    icon: '◇',
     headline: 'Frame Your Features',
     intro: 'Expertly shaped and styled brows and lashes to perfectly frame your face. From subtle definition to a bold, dramatic look.',
     treatments: [
@@ -116,8 +112,8 @@ export default function TreatmentsPage() {
           <div className="max-w-6xl mx-auto">
             <FadeIn className="flex flex-col sm:flex-row sm:items-end gap-4 mb-14">
               <div>
-                <span className="text-3xl text-[#C9A84C] mr-3" style={{ fontFamily: "'Cormorant Garamond', serif" }}>{cat.icon}</span>
-                <h2 className="inline text-[2.2rem] sm:text-[2.8rem] text-[#2C2C2C]" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+                <div className="mb-4 h-px w-12 bg-[#C9A84C]/75" aria-hidden="true" />
+                <h2 className="text-[2.2rem] sm:text-[2.8rem] text-[#2C2C2C]" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
                   {cat.label}
                 </h2>
               </div>
@@ -150,10 +146,7 @@ export default function TreatmentsPage() {
                   <FadeIn key={t.name} delay={150 + ti * 80}>
                     <div className="group relative flex gap-3 p-5 sm:p-6 bg-white border border-[#E8E0D5] hover:border-[#2D6A4F]/30 transition-all duration-300 rounded-xl sm:rounded-none">
                       <div className="absolute left-0 top-0 h-full w-1 bg-[#2D6A4F]/0 transition-colors duration-300 group-hover:bg-[#2D6A4F]/80" />
-                      <div className="shrink-0 flex items-center justify-center w-8 h-8 border border-[#E8E0D5] text-[#C9A84C] rounded-md sm:rounded-none">
-                        <Sparkles size={12} />
-                      </div>
-                      <div className="flex-1">
+                      <div className="flex-1 min-w-0">
                         <div className="flex items-start justify-between gap-4 mb-1">
                           <h4 className="text-lg text-[#2C2C2C] group-hover:text-[#2D6A4F] transition-colors" style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 500 }}>
                             {t.name}

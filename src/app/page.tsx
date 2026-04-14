@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, ChevronRight } from 'lucide-react';
 import olenaImg from '@/images/olena.png';
+import header1Img from '@/images/header1.png';
 
 /* ─── Inline SVG stars — fill always works ─── */
 function StarIcon({ size = 14, color = '#C9A84C' }: { size?: number; color?: string }) {
@@ -74,25 +75,21 @@ function FadeIn({ children, delay = 0, className = '' }: {
 /* ─── Data ─── */
 const services = [
   {
-    icon: '✦',
     title: 'Laser Hair Removal',
     description: 'Permanent reduction with medical-grade laser — safe on all skin types.',
     href: '/treatments#laser',
   },
   {
-    icon: '◈',
     title: 'Skin Rejuvenation',
     description: 'Microneedling, peels & RF to restore radiance and smooth texture.',
     href: '/treatments#rejuvenation',
   },
   {
-    icon: '❋',
     title: 'Facial Treatments',
     description: 'Bespoke facials tailored to your skin type — hydration to anti-ageing.',
     href: '/treatments#facials',
   },
   {
-    icon: '◇',
     title: 'Brow & Lash',
     description: 'Lamination, lifting and tinting to define and frame your features.',
     href: '/treatments#brow',
@@ -140,11 +137,28 @@ export default function HomePage() {
           }}
         />
 
-        {/* Content grid — fills all available height */}
-        <div className="relative flex-1 grid grid-cols-1 lg:grid-cols-2 max-w-7xl mx-auto w-full px-6 lg:px-12">
+        {/* Content grid — image column wider than 50/50 so portrait hero crops less */}
+        <div className="relative flex-1 grid grid-cols-1 lg:grid-cols-12 max-w-7xl mx-auto w-full px-6 lg:px-12">
 
-          {/* ── Left: Text ── */}
-          <div className="flex flex-col justify-center py-36 lg:py-0 lg:pr-16">
+          {/* ── Left: Text (+ mobile hero portrait) ── */}
+          <div className="flex flex-col justify-center py-36 lg:py-0 lg:pr-16 lg:col-span-5">
+            <div
+              className="relative w-full aspect-[3/4] max-h-[min(52vh,440px)] mb-10 lg:hidden overflow-hidden border border-[#E8E0D5]/90"
+              style={{
+                opacity: loaded ? 1 : 0,
+                transform: loaded ? 'none' : 'translateY(12px)',
+                transition: 'opacity 0.65s ease 0.1s, transform 0.65s ease 0.1s',
+              }}
+            >
+              <Image
+                src={header1Img}
+                alt="Olena — Aesthetic Specialist"
+                fill
+                className="object-cover object-[center_20%]"
+                sizes="100vw"
+                priority
+              />
+            </div>
 
             <div
               className="inline-flex items-center gap-3 mb-10"
@@ -201,19 +215,19 @@ export default function HomePage() {
             </p>
 
             <div
-              className="flex flex-row flex-wrap gap-4"
+              className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-lg mx-auto"
               style={{
                 opacity: loaded ? 1 : 0,
                 transform: loaded ? 'none' : 'translateY(14px)',
                 transition: 'opacity 0.7s ease 0.75s, transform 0.7s ease 0.75s',
               }}
             >
-              <Link href="/contact" className="btn btn-primary">
+              <Link href="/contact" className="btn btn-primary w-full justify-center text-center">
                 Book Appointment <ArrowRight size={13} />
               </Link>
               <Link
                 href="/treatments"
-                className="btn"
+                className="btn w-full justify-center text-center"
                 style={{ border: '1px solid rgba(44,44,44,0.25)', color: '#2C2C2C' }}
               >
                 View Treatments
@@ -221,9 +235,9 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* ── Right: Photo ── */}
+          {/* ── Right: Photo (wider column + calmer focal point than object-top) ── */}
           <div
-            className="relative hidden lg:block"
+            className="relative hidden lg:block lg:col-span-7 min-h-0"
             style={{
               opacity: loaded ? 1 : 0,
               transition: 'opacity 0.9s ease 0.4s',
@@ -235,8 +249,8 @@ export default function HomePage() {
                 src={olenaImg}
                 alt="Olena — Aesthetic Specialist"
                 fill
-                className="object-cover object-top"
-                sizes="50vw"
+                className="object-cover object-[center_22%]"
+                sizes="(max-width: 1280px) 58vw, 52vw"
                 priority
               />
               {/* Subtle left-edge fade so photo bleeds into text area softly */}
@@ -326,23 +340,12 @@ export default function HomePage() {
               <FadeIn key={s.title} delay={i * 90}>
                 <Link
                   href={s.href}
-                  className="group flex flex-col p-6 sm:p-9 rounded-2xl sm:rounded-none bg-white border border-[#E8E0D5] shadow-[0_8px_20px_rgba(34,34,34,0.05)] sm:shadow-none hover:border-[#2D6A4F]/35 hover:shadow-md transition-all duration-300 h-full relative overflow-hidden"
+                  className="group flex flex-col p-6 sm:p-8 rounded-xl bg-transparent border border-[#DED4C8]/85 hover:bg-[#F9F6F0]/55 hover:border-[#2D6A4F]/35 transition-all duration-300 h-full relative overflow-hidden"
                 >
                   {/* Top slide-in accent */}
                   <div className="absolute top-0 left-0 h-0.5 w-0 bg-[#2D6A4F] group-hover:w-full transition-all duration-500" />
 
-                  {/* Consistent icon: 28px serif character in a fixed-size box */}
-                  <div
-                    className="mb-5 sm:mb-7 flex items-center justify-center w-12 h-12 sm:w-11 sm:h-11 rounded-xl sm:rounded-none border border-[#E8E0D5] bg-[#F9F6F0]"
-                    aria-hidden="true"
-                  >
-                    <span
-                      className="leading-none select-none"
-                      style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.25rem', color: '#C9A84C' }}
-                    >
-                      {s.icon}
-                    </span>
-                  </div>
+                  <div className="mb-5 sm:mb-6 h-px w-10 bg-[#C9A84C]/70" aria-hidden="true" />
 
                   <h3
                     className="text-[1.3rem] sm:text-[1.25rem] text-[#2C2C2C] mb-3 group-hover:text-[#2D6A4F] transition-colors"
