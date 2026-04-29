@@ -4,10 +4,10 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'Olena Aesthetics | Advanced Beauty & Skin Treatments',
+  title: 'Olena Aesthetics | Laser Hair Removal & Skin Treatments Southampton',
   description:
-    'Professional aesthetic and beauty treatments including laser hair removal, skin rejuvenation and personalised facial treatments. Book your appointment today.',
-  keywords: 'aesthetics, laser hair removal, skin rejuvenation, facial treatments, beauty clinic, Dublin',
+    'Professional aesthetic treatments in Southampton — laser hair removal, RF microneedling, tattoo removal and carbon peeling. Book your appointment today.',
+  keywords: 'laser hair removal Southampton, RF microneedling, tattoo removal, carbon peeling, Hollywood peel, aesthetics Southampton, Olena Shevchenko',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -21,9 +21,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           rel="stylesheet"
         />
       </head>
-      <body>
+      <body className="overflow-x-hidden">
         <Header />
-        <main>{children}</main>
+        <main className="min-w-0 w-full">{children}</main>
         <Footer />
       </body>
     </html>

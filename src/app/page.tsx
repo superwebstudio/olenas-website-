@@ -3,9 +3,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
-import { ArrowRight, ChevronRight } from 'lucide-react';
-import olenaImg from '@/images/olena.png';
-import header1Img from '@/images/header1.png';
+import { ArrowRight } from 'lucide-react';
+import olenaImg from '@/images/olena.jpg';
 
 /* ─── Inline SVG stars — fill always works ─── */
 function StarIcon({ size = 14, color = '#C9A84C' }: { size?: number; color?: string }) {
@@ -76,23 +75,23 @@ function FadeIn({ children, delay = 0, className = '' }: {
 const services = [
   {
     title: 'Laser Hair Removal',
-    description: 'Permanent reduction with medical-grade laser — safe on all skin types.',
+    description: 'Long-term hair reduction with clinical-grade laser technology — for women and men.',
     href: '/treatments#laser',
   },
   {
-    title: 'Skin Rejuvenation',
-    description: 'Microneedling, peels & RF to restore radiance and smooth texture.',
-    href: '/treatments#rejuvenation',
+    title: 'RF Microneedling',
+    description: 'Non-surgical skin tightening combining radiofrequency and microneedling for collagen stimulation.',
+    href: '/treatments#rf-microneedling',
   },
   {
-    title: 'Facial Treatments',
-    description: 'Bespoke facials tailored to your skin type — hydration to anti-ageing.',
-    href: '/treatments#facials',
+    title: 'Tattoo Removal',
+    description: 'Professional laser removal of tattoos and permanent makeup, including all sizes and colours.',
+    href: '/treatments#tattoo-removal',
   },
   {
-    title: 'Brow & Lash',
-    description: 'Lamination, lifting and tinting to define and frame your features.',
-    href: '/treatments#brow',
+    title: 'Carbon Peeling',
+    description: 'The Hollywood Facial Peel — deep pore cleansing and instant radiance with zero downtime.',
+    href: '/treatments#carbon-peeling',
   },
 ];
 
@@ -138,12 +137,12 @@ export default function HomePage() {
         />
 
         {/* Content grid — image column wider than 50/50 so portrait hero crops less */}
-        <div className="relative flex-1 grid grid-cols-1 lg:grid-cols-12 max-w-7xl mx-auto w-full px-6 lg:px-12">
+        <div className="relative flex-1 grid grid-cols-1 lg:grid-cols-12 site-container">
 
           {/* ── Left: Text (+ mobile hero portrait) ── */}
           <div className="flex flex-col justify-center py-36 lg:py-0 lg:pr-16 lg:col-span-5">
             <div
-              className="relative w-full aspect-[3/4] max-h-[min(52vh,440px)] mb-10 lg:hidden overflow-hidden border border-[#E8E0D5]/90"
+              className="relative w-full aspect-[3/4] max-h-[min(52vh,440px)] mb-10 lg:hidden overflow-hidden shadow-[0_16px_48px_rgba(45,106,79,0.1)]"
               style={{
                 opacity: loaded ? 1 : 0,
                 transform: loaded ? 'none' : 'translateY(12px)',
@@ -151,10 +150,10 @@ export default function HomePage() {
               }}
             >
               <Image
-                src={header1Img}
+                src={olenaImg}
                 alt="Olena — Aesthetic Specialist"
                 fill
-                className="object-cover object-[center_20%]"
+                className="object-cover object-[center_22%]"
                 sizes="100vw"
                 priority
               />
@@ -211,7 +210,7 @@ export default function HomePage() {
                 transition: 'opacity 0.7s ease 0.6s, transform 0.7s ease 0.6s',
               }}
             >
-              Professional laser, skin rejuvenation and personalised facial treatments — tailored to help you achieve healthy, confident-looking skin.
+              Laser hair removal, RF microneedling, tattoo removal and carbon peeling — advanced treatments tailored to help you achieve confident, healthy-looking skin.
             </p>
 
             <div
@@ -227,8 +226,8 @@ export default function HomePage() {
               </Link>
               <Link
                 href="/treatments"
-                className="btn w-full justify-center text-center"
-                style={{ border: '1px solid rgba(44,44,44,0.25)', color: '#2C2C2C' }}
+                className="btn w-full justify-center text-center bg-white/80 shadow-[0_2px_14px_rgba(44,44,44,0.08)] hover:shadow-[0_6px_22px_rgba(44,44,44,0.12)]"
+                style={{ color: '#2C2C2C' }}
               >
                 View Treatments
               </Link>
@@ -264,7 +263,7 @@ export default function HomePage() {
 
             {/* Stats badge floating bottom-left of image */}
             <div
-              className="absolute bottom-12 left-0 -translate-x-1/2 bg-white border border-[#E8E0D5] px-7 py-5 shadow-sm z-10"
+              className="absolute bottom-12 left-1/2 z-10 -translate-x-1/2 rounded-sm bg-white px-7 py-5 shadow-[0_12px_36px_rgba(0,0,0,0.1)]"
               style={{ minWidth: 160 }}
             >
               <div className="flex gap-1 mb-2">
@@ -295,29 +294,31 @@ export default function HomePage() {
       </section>
 
       {/* ══════════════ TRUST STRIP ══════════════ */}
-      <section style={{ backgroundColor: '#2D6A4F', padding: '2.75rem 1.5rem' }}>
-        <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-20">
+      <section className="bg-[#F9F6F0] py-7">
+        <div className="site-container">
+          <div className="mx-auto flex max-w-4xl flex-col items-center justify-center gap-6 sm:flex-row sm:gap-20">
           {[
             { label: 'Advanced Technology', Icon: SparkleIcon },
             { label: 'Certified Specialist', Icon: ShieldIcon },
             { label: 'Personalised Care',   Icon: HeartIcon  },
           ].map(({ label, Icon }) => (
-            <div key={label} className="flex items-center gap-3 text-white">
-              <span style={{ color: '#E0C068' }}><Icon /></span>
+            <div key={label} className="flex items-center gap-2.5" style={{ color: '#2D6A4F' }}>
+              <span><Icon /></span>
               <span
-                className="text-[0.68rem] tracking-[0.2em] uppercase"
-                style={{ fontFamily: "'Jost', sans-serif", fontWeight: 400 }}
+                className="text-[0.65rem] tracking-[0.2em] uppercase"
+                style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500, color: '#2C2C2C' }}
               >
                 {label}
               </span>
             </div>
           ))}
         </div>
+        </div>
       </section>
 
       {/* ══════════════ SERVICES ══════════════ */}
       <section className="section-padding" style={{ backgroundColor: '#F9F6F0' }}>
-        <div className="max-w-6xl mx-auto">
+        <div className="site-container">
 
           <FadeIn className="text-center mb-20">
             <p
@@ -335,47 +336,52 @@ export default function HomePage() {
             <div className="gold-divider" />
           </FadeIn>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
             {services.map((s, i) => (
               <FadeIn key={s.title} delay={i * 90}>
                 <Link
                   href={s.href}
-                  className="group flex flex-col p-6 sm:p-8 rounded-xl bg-transparent border border-[#DED4C8]/85 hover:bg-[#F9F6F0]/55 hover:border-[#2D6A4F]/35 transition-all duration-300 h-full relative overflow-hidden"
+                  className="group flex flex-col p-7 bg-white shadow-[inset_0_3px_0_0_#2D6A4F,0_6px_28px_rgba(0,0,0,0.06)] hover:shadow-[inset_0_3px_0_0_#2D6A4F,0_14px_40px_rgba(45,106,79,0.12)] hover:-translate-y-0.5 transition-all duration-300 h-full rounded-sm"
                 >
-                  {/* Top slide-in accent */}
-                  <div className="absolute top-0 left-0 h-0.5 w-0 bg-[#2D6A4F] group-hover:w-full transition-all duration-500" />
-
-                  <div className="mb-5 sm:mb-6 h-px w-10 bg-[#C9A84C]/70" aria-hidden="true" />
+                  <p
+                    className="text-[0.55rem] tracking-[0.28em] uppercase text-[#C9A84C] mb-5"
+                    style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500 }}
+                  >
+                    0{i + 1}
+                  </p>
 
                   <h3
-                    className="text-[1.3rem] sm:text-[1.25rem] text-[#2C2C2C] mb-3 group-hover:text-[#2D6A4F] transition-colors"
+                    className="text-[1.25rem] text-[#2C2C2C] mb-3 group-hover:text-[#2D6A4F] transition-colors duration-200"
                     style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 500 }}
                   >
                     {s.title}
                   </h3>
 
-                  {/* Single short line — no overflow */}
                   <p
-                    className="text-sm text-[#7A7370] leading-relaxed flex-1"
-                    style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300, lineHeight: 1.75 }}
+                    className="text-sm text-[#7A7370] flex-1"
+                    style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300, lineHeight: 1.8 }}
                   >
                     {s.description}
                   </p>
 
                   <span
-                    className="inline-flex items-center gap-1 mt-6 sm:mt-7 text-[0.62rem] tracking-[0.15em] uppercase text-[#2D6A4F]"
+                    className="inline-flex items-center gap-2 mt-6 text-[0.65rem] tracking-[0.15em] uppercase text-[#2D6A4F] group-hover:gap-3 transition-all duration-200"
                     style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500 }}
                   >
-                    Learn more <ChevronRight size={11} />
+                    Book Now <ArrowRight size={12} />
                   </span>
                 </Link>
               </FadeIn>
             ))}
           </div>
 
-          <FadeIn delay={350} className="text-center mt-14">
-            <Link href="/treatments" className="btn btn-outline">
-              All Treatments <ArrowRight size={13} />
+          <FadeIn delay={350} className="text-center mt-12">
+            <Link
+              href="/treatments"
+              className="text-[0.68rem] tracking-[0.18em] uppercase text-[#7A7370] hover:text-[#2D6A4F] transition-colors inline-flex items-center gap-2"
+              style={{ fontFamily: "'Jost', sans-serif", fontWeight: 400 }}
+            >
+              View all treatments <ArrowRight size={12} />
             </Link>
           </FadeIn>
         </div>
@@ -383,12 +389,12 @@ export default function HomePage() {
 
       {/* ══════════════ ABOUT TEASER ══════════════ */}
       <section className="section-padding" style={{ backgroundColor: '#F4EFE8' }}>
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+        <div className="site-container grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
 
           {/* Photo */}
           <FadeIn>
             <div className="relative" style={{ paddingBottom: '2rem' }}>
-              <div className="aspect-[4/5] relative overflow-hidden border border-[#E8E0D5]">
+              <div className="aspect-[4/5] relative overflow-hidden rounded-sm shadow-[0_22px_56px_rgba(35,35,35,0.14)]">
                 <Image
                   src={olenaImg}
                   alt="Olena — Aesthetic Specialist"
@@ -396,8 +402,6 @@ export default function HomePage() {
                   className="object-cover object-center"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
-                <div className="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-[#C9A84C] z-10" />
-                <div className="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-[#C9A84C] z-10" />
               </div>
               <div className="absolute -bottom-2 -right-2 sm:-bottom-0 sm:-right-6 bg-[#2D6A4F] text-white px-6 py-4 z-10">
                 <p className="text-2xl" style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 400 }}>8+</p>
@@ -430,8 +434,8 @@ export default function HomePage() {
             </p>
             <Link
               href="/about"
-              className="inline-flex items-center gap-2 text-[#2D6A4F] border-b border-[#2D6A4F]/35 pb-0.5 hover:border-[#2D6A4F] transition-colors"
-              style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500, fontSize: '0.7rem', letterSpacing: '0.15em', textTransform: 'uppercase' }}
+              className="inline-flex items-center gap-2 text-[#2D6A4F] underline underline-offset-[6px] decoration-[#2D6A4F]/35 hover:decoration-[#2D6A4F] transition-colors"
+              style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500, fontSize: '0.7rem', letterSpacing: '0.15em', textTransform: 'uppercase', textDecorationThickness: '1px' }}
             >
               Read My Story <ArrowRight size={13} />
             </Link>
@@ -441,7 +445,7 @@ export default function HomePage() {
 
       {/* ══════════════ TESTIMONIALS ══════════════ */}
       <section className="section-padding" style={{ backgroundColor: '#222222' }}>
-        <div className="max-w-6xl mx-auto">
+        <div className="site-container">
 
           <FadeIn className="text-center mb-20">
             <p
@@ -463,7 +467,7 @@ export default function HomePage() {
               <FadeIn key={t.name} delay={i * 110}>
                 <div
                   className="flex flex-col p-6 sm:p-9 rounded-2xl sm:rounded-none relative"
-                  style={{ backgroundColor: '#2b2b2b', border: '1px solid #3f3f3f', boxShadow: '0 10px 24px rgba(0,0,0,0.18)' }}
+                  style={{ backgroundColor: '#2b2b2b', boxShadow: '0 16px 40px rgba(0,0,0,0.35)' }}
                 >
                   {/* Large quote mark */}
                   <span
@@ -523,7 +527,8 @@ export default function HomePage() {
           }}
         />
 
-        <FadeIn className="relative text-center max-w-xl mx-auto">
+        <div className="site-container relative text-center">
+        <FadeIn className="relative mx-auto max-w-xl text-center">
           <p
             className="text-[0.62rem] tracking-[0.28em] uppercase text-[#C9A84C] mb-5"
             style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500 }}
@@ -547,6 +552,7 @@ export default function HomePage() {
             Book Your Consultation <ArrowRight size={13} />
           </Link>
         </FadeIn>
+        </div>
       </section>
     </>
   );

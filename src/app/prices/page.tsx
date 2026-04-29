@@ -3,8 +3,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
-import { ArrowRight, Check } from 'lucide-react';
-import olenaImg from '@/images/olena.png';
+import { ArrowRight } from 'lucide-react';
+import olenaImg from '@/images/olena.jpg';
 
 function FadeIn({ children, delay = 0, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -26,114 +26,53 @@ function FadeIn({ children, delay = 0, className = '' }: { children: React.React
   );
 }
 
-const pricingGroups = [
-  {
-    category: 'Laser Hair Removal',
-    icon: '✦',
-    items: [
-      { name: 'Upper Lip', price: '€40', sessions: 'per session' },
-      { name: 'Chin', price: '€40', sessions: 'per session' },
-      { name: 'Underarms', price: '€55', sessions: 'per session' },
-      { name: 'Bikini Line', price: '€65', sessions: 'per session' },
-      { name: 'Brazilian / Hollywood', price: '€85', sessions: 'per session' },
-      { name: 'Half Legs', price: '€90', sessions: 'per session' },
-      { name: 'Full Legs', price: '€130', sessions: 'per session' },
-      { name: 'Full Body Package', price: '€280', sessions: 'per session' },
-    ],
-  },
-  {
-    category: 'Skin Rejuvenation',
-    icon: '◈',
-    items: [
-      { name: 'Microneedling (face)', price: '€150', sessions: 'per session' },
-      { name: 'Chemical Peel', price: '€90', sessions: 'per session' },
-      { name: 'LED Light Therapy', price: '€60', sessions: 'per session' },
-      { name: 'Mesotherapy', price: '€180', sessions: 'per session' },
-      { name: 'RF Skin Tightening (face)', price: '€140', sessions: 'per session' },
-      { name: 'RF Skin Tightening (body)', price: '€160', sessions: 'per session' },
-    ],
-  },
-  {
-    category: 'Facial Treatments',
-    icon: '❋',
-    items: [
-      { name: 'Signature Facial', price: '€85', sessions: '75 min' },
-      { name: 'Anti-Ageing Facial', price: '€110', sessions: '90 min' },
-      { name: 'Brightening Facial', price: '€95', sessions: '75 min' },
-      { name: 'Hydra Facial', price: '€120', sessions: '60 min' },
-      { name: 'Back Facial', price: '€90', sessions: '60 min' },
-    ],
-  },
-  {
-    category: 'Brow & Lash',
-    icon: '◇',
-    items: [
-      { name: 'Brow Lamination', price: '€60', sessions: '45 min' },
-      { name: 'Brow Tint & Shape', price: '€30', sessions: '30 min' },
-      { name: 'Lash Lift & Tint', price: '€75', sessions: '60 min' },
-      { name: 'Lash Tint', price: '€25', sessions: '20 min' },
-      { name: 'Brow Lam + Lash Lift Combo', price: '€120', sessions: '90 min' },
-    ],
-  },
-];
+function PriceRow({ name, price }: { name: string; price: string }) {
+  return (
+    <li className="flex items-center justify-between px-5 sm:px-6 py-3.5 hover:bg-[#F9F6F0] transition-colors">
+      <p className="text-sm text-[#2C2C2C]" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 400 }}>{name}</p>
+      <span className="text-lg text-[#2D6A4F] ml-4 shrink-0" style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 500 }}>{price}</span>
+    </li>
+  );
+}
 
-const packages = [
-  {
-    name: 'Starter',
-    subtitle: 'Great for first-timers',
-    price: '€199',
-    period: 'package',
-    includes: [
-      '3 × Laser Hair Removal sessions (1 area)',
-      '1 × Signature Facial',
-      'Personalised aftercare plan',
-      'Priority booking',
-    ],
-    highlight: false,
-  },
-  {
-    name: 'Glow',
-    subtitle: 'Most popular',
-    price: '€399',
-    period: 'package',
-    includes: [
-      '6 × Laser Hair Removal sessions (1 area)',
-      '3 × Signature Facials',
-      '1 × Chemical Peel',
-      'Skin health assessment',
-      'Home care product recommendations',
-      'Priority booking',
-    ],
-    highlight: true,
-  },
-  {
-    name: 'Prestige',
-    subtitle: 'Complete transformation',
-    price: '€750',
-    period: 'package',
-    includes: [
-      '6 × Laser Hair Removal sessions (2 areas)',
-      '6 × Treatments of your choice',
-      '1 × Microneedling session',
-      'Full skin analysis',
-      'Tailored skincare regime',
-      'Quarterly skin reviews',
-      'VIP priority booking',
-    ],
-    highlight: false,
-  },
-];
+function PriceCard({ title, icon, items, delay = 0 }: { title: string; icon: string; items: { name: string; price: string }[]; delay?: number }) {
+  return (
+    <FadeIn delay={delay}>
+      <div className="rounded-xl bg-white overflow-hidden shadow-[0_12px_40px_rgba(34,34,34,0.08)]">
+        <div className="px-5 sm:px-6 py-4 sm:py-5 bg-[#FAFAF7] flex items-center gap-3">
+          <span className="text-xl text-[#C9A84C]" style={{ fontFamily: "'Cormorant Garamond', serif" }}>{icon}</span>
+          <h3 className="text-[1.2rem] sm:text-[1.4rem] text-[#2C2C2C]" style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 500 }}>{title}</h3>
+        </div>
+        <ul className="divide-y divide-[#EDEAE4]">
+          {items.map((item) => <PriceRow key={item.name} name={item.name} price={item.price} />)}
+        </ul>
+      </div>
+    </FadeIn>
+  );
+}
+
+function SectionHeading({ label, title }: { label: string; title: string }) {
+  return (
+    <FadeIn className="text-center mb-10">
+      <p className="text-[0.62rem] tracking-[0.28em] uppercase text-[#C9A84C] mb-4" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500 }}>{label}</p>
+      <h2 className="text-[2.2rem] sm:text-[2.8rem] text-[#2C2C2C] mb-4" style={{ fontFamily: "'Cormorant Garamond', serif" }}>{title}</h2>
+      <div className="gold-divider" />
+    </FadeIn>
+  );
+}
 
 export default function PricesPage() {
   return (
     <>
+      {/* ── Hero ── */}
       <section className="page-hero bg-[#F4EFE8] overflow-hidden">
         <div className="absolute inset-y-0 right-0 hidden md:block w-[34%] opacity-35">
           <Image src={olenaImg} alt="" fill sizes="34vw" className="object-cover object-top" aria-hidden="true" />
           <div className="absolute inset-0 bg-gradient-to-l from-[#F4EFE8]/30 via-[#F4EFE8]/70 to-[#F4EFE8]" />
         </div>
         <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 40% 60%, rgba(201,168,76,0.15) 0%, transparent 60%)' }} />
-        <div className="max-w-3xl mx-auto text-center relative">
+        <div className="site-container relative text-center">
+          <div className="relative mx-auto max-w-3xl">
           <p className="text-[0.62rem] tracking-[0.28em] uppercase text-[#C9A84C] mb-5" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500 }}>
             Transparent Pricing
           </p>
@@ -142,125 +81,216 @@ export default function PricesPage() {
           </h1>
           <div className="gold-divider mb-8" />
           <p className="text-[1rem] text-[#7A7370] max-w-lg mx-auto" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300, lineHeight: 1.85 }}>
-            Clear, honest pricing with no hidden fees. Packages available for the best value. All prices include a complimentary skin consultation.
+            Clear, honest pricing with no hidden fees. All prices are per session. A patch test is required prior to laser treatments at no extra charge.
           </p>
+          </div>
         </div>
       </section>
 
+      {/* ════════════════════════════════
+          LASER HAIR REMOVAL — WOMEN
+      ════════════════════════════════ */}
       <section className="section-padding bg-[#F9F6F0]">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-10">
-            {pricingGroups.map((group, gi) => (
-              <FadeIn key={group.category} delay={gi * 80} className="mx-4 sm:mx-0">
-                <div className="border border-[#E8E0D5] bg-white rounded-xl sm:rounded-none overflow-hidden shadow-[0_10px_24px_rgba(34,34,34,0.06)]">
-                  <div className="px-6 sm:px-8 py-5 sm:py-6 border-b border-[#E8E0D5] flex items-center gap-3">
-                    <span className="text-xl text-[#C9A84C]" style={{ fontFamily: "'Cormorant Garamond', serif" }}>{group.icon}</span>
-                    <h2 className="text-[1.4rem] sm:text-2xl text-[#2C2C2C]" style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 500 }}>
-                      {group.category}
-                    </h2>
-                  </div>
-                  <ul className="divide-y divide-[#F4EFE8]">
-                    {group.items.map((item) => (
-                      <li key={item.name} className="flex items-center justify-between px-6 sm:px-8 py-4 hover:bg-[#F9F6F0] transition-colors">
-                        <div>
-                          <p className="text-sm text-[#2C2C2C]" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 400 }}>{item.name}</p>
-                          <p className="text-[0.62rem] text-[#7A7370] tracking-wide" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300 }}>{item.sessions}</p>
-                        </div>
-                        <span className="text-lg text-[#2D6A4F]" style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 500 }}>
-                          {item.price}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </FadeIn>
-            ))}
+        <div className="site-container">
+          <SectionHeading label="Per Session" title="Laser Hair Removal — Women" />
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-10">
+            <PriceCard
+              title="Face"
+              icon="✦"
+              delay={80}
+              items={[
+                { name: 'Full Face', price: '€45' },
+                { name: 'Upper Lip', price: '€20' },
+                { name: 'Chin', price: '€20' },
+                { name: 'Chin + Upper Lip', price: '€30' },
+                { name: 'Sideburns', price: '€20' },
+              ]}
+            />
+            <PriceCard
+              title="Bikini"
+              icon="◈"
+              delay={160}
+              items={[
+                { name: 'Bikini', price: '€30' },
+                { name: 'Brazilian', price: '€40' },
+                { name: 'Hollywood', price: '€55' },
+              ]}
+            />
+            <PriceCard
+              title="Body"
+              icon="❋"
+              delay={240}
+              items={[
+                { name: 'Underarms', price: '€30' },
+                { name: 'Half Arms', price: '€40' },
+                { name: 'Full Arms', price: '€50' },
+                { name: 'Half Legs', price: '€50' },
+                { name: 'Full Legs', price: '€70' },
+                { name: 'Abdomen', price: '€35' },
+                { name: 'Abdomen Centre Line', price: '€20' },
+                { name: 'Chest', price: '€50' },
+                { name: 'Full Back', price: '€70' },
+                { name: 'Lower Back', price: '€35' },
+                { name: 'Buttocks', price: '€45' },
+                { name: 'Areola', price: '€20' },
+                { name: 'Fingers / Toes', price: '€10' },
+              ]}
+            />
           </div>
 
-          <FadeIn delay={300} className="mt-10 text-center">
-            <p className="text-sm text-[#7A7370] italic" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300 }}>
-              * Prices listed are per individual session. Package rates offer significant savings — see below.
-              A patch test is required prior to laser treatments at no extra charge.
-            </p>
+          <FadeIn delay={320}>
+            <div className="rounded-xl bg-white overflow-hidden shadow-[0_12px_40px_rgba(34,34,34,0.08)]">
+              <div className="px-5 sm:px-6 py-4 sm:py-5 bg-[#FAFAF7] flex items-center gap-3">
+                <span className="text-xl text-[#C9A84C]" style={{ fontFamily: "'Cormorant Garamond', serif" }}>◇</span>
+                <h3 className="text-[1.2rem] sm:text-[1.4rem] text-[#2C2C2C]" style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 500 }}>Special Offers — Women</h3>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8 p-5 sm:p-6 pt-4">
+                <ul className="divide-y divide-[#EDEAE4] rounded-lg overflow-hidden bg-[#FBFAF8]">
+                  <PriceRow name="Underarms + Bikini" price="€45" />
+                  <PriceRow name="Underarms + Brazilian" price="€55" />
+                  <PriceRow name="Underarms + Hollywood" price="€65" />
+                  <PriceRow name="Half Legs + Underarms + Bikini" price="€90" />
+                  <PriceRow name="Half Legs + Underarms + Brazilian" price="€95" />
+                </ul>
+                <ul className="divide-y divide-[#EDEAE4] rounded-lg overflow-hidden bg-[#FBFAF8]">
+                  <PriceRow name="Half Legs + Underarms + Hollywood" price="€115" />
+                  <PriceRow name="Full Legs + Underarms + Bikini" price="€120" />
+                  <PriceRow name="Full Legs + Underarms + Brazilian" price="€135" />
+                  <PriceRow name="Full Legs + Underarms + Hollywood" price="€150" />
+                </ul>
+              </div>
+            </div>
           </FadeIn>
         </div>
       </section>
 
+      {/* ════════════════════════════════
+          LASER HAIR REMOVAL — MEN
+      ════════════════════════════════ */}
       <section className="section-padding bg-[#F4EFE8]">
-        <div className="max-w-6xl mx-auto">
-          <FadeIn className="text-center mb-16">
-            <p className="text-[0.62rem] tracking-[0.28em] uppercase text-[#C9A84C] mb-5" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500 }}>
-              Best Value
-            </p>
-            <h2 className="text-[2.4rem] sm:text-[3rem] text-[#2C2C2C] mb-5" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
-              Treatment Packages
-            </h2>
-            <div className="gold-divider" />
-          </FadeIn>
+        <div className="site-container">
+          <SectionHeading label="Per Session" title="Laser Hair Removal — Men" />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-8 pb-3 sm:pb-6">
-            {packages.map((pkg, pi) => (
-              <FadeIn key={pkg.name} delay={pi * 100} className="mx-4 sm:mx-0">
-                <div className={`relative flex flex-col border rounded-xl sm:rounded-none overflow-hidden h-full ${
-                  pkg.highlight ? 'border-[#2D6A4F] bg-[#2D6A4F]' : 'border-[#DCD2C5] bg-[#FFFDF9] shadow-[0_12px_28px_rgba(34,34,34,0.07)]'
-                }`}>
-                  <div className={`p-6 sm:p-8 border-b ${pkg.highlight ? 'border-[#40916C]' : 'border-[#E8E0D5]'}`}>
-                    <div className="mb-2 flex items-center justify-between gap-2">
-                      <p className={`text-[0.58rem] tracking-[0.2em] uppercase ${pkg.highlight ? 'text-[#C9A84C]' : 'text-[#7A7370]'}`} style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500 }}>
-                        {pkg.subtitle}
-                      </p>
-                      {pkg.highlight && (
-                        <span className="text-[0.52rem] tracking-[0.2em] uppercase text-[#C9A84C] border border-[#C9A84C]/50 px-2 py-1">
-                          Popular
-                        </span>
-                      )}
-                    </div>
-                    <h3 className={`text-[1.8rem] mb-1 ${pkg.highlight ? 'text-white' : 'text-[#2C2C2C]'}`} style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 400 }}>
-                      {pkg.name}
-                    </h3>
-                    <div className="flex items-baseline gap-1 mt-3">
-                      <span className={`text-[2.2rem] ${pkg.highlight ? 'text-white' : 'text-[#2D6A4F]'}`} style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 400 }}>
-                        {pkg.price}
-                      </span>
-                      <span className={`text-xs ${pkg.highlight ? 'text-white/60' : 'text-[#7A7370]'}`} style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300 }}>
-                        / {pkg.period}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="p-6 sm:p-8 flex-1">
-                    <ul className="space-y-3">
-                      {pkg.includes.map((item) => (
-                        <li key={item} className="flex items-start gap-3">
-                          <Check size={14} className={`mt-0.5 shrink-0 ${pkg.highlight ? 'text-[#C9A84C]' : 'text-[#2D6A4F]'}`} />
-                          <span className={`text-sm ${pkg.highlight ? 'text-white/80' : 'text-[#7A7370]'}`} style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300 }}>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="px-6 sm:px-8 pb-6 sm:pb-8">
-                    <Link
-                      href="/contact"
-                      className={`btn w-full ${pkg.highlight ? 'btn-gold' : 'btn-outline'}`}
-                    >
-                      Get This Package
-                    </Link>
-                  </div>
-                </div>
-              </FadeIn>
-            ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-10">
+            <PriceCard
+              title="Face"
+              icon="✦"
+              delay={80}
+              items={[
+                { name: 'Beard', price: '€60' },
+                { name: 'Cheeks', price: '€40' },
+                { name: 'Neck (Front / Back)', price: '€50' },
+              ]}
+            />
+            <PriceCard
+              title="Body"
+              icon="◈"
+              delay={160}
+              items={[
+                { name: 'Underarms', price: '€45' },
+                { name: 'Chest', price: '€80' },
+                { name: 'Abdomen', price: '€60' },
+                { name: 'Chest + Abdomen', price: '€120' },
+                { name: 'Shoulders', price: '€60' },
+                { name: 'Full Arms', price: '€80' },
+                { name: 'Half Legs', price: '€100' },
+                { name: 'Full Legs', price: '€140' },
+                { name: 'Full Back', price: '€100' },
+                { name: 'Buttocks', price: '€50' },
+                { name: 'Bikini', price: '€90' },
+              ]}
+            />
           </div>
+
+          <FadeIn delay={280}>
+            <div className="rounded-xl bg-white overflow-hidden shadow-[0_12px_40px_rgba(34,34,34,0.08)]">
+              <div className="px-5 sm:px-6 py-4 sm:py-5 bg-[#FAFAF7] flex items-center gap-3">
+                <span className="text-xl text-[#C9A84C]" style={{ fontFamily: "'Cormorant Garamond', serif" }}>◇</span>
+                <h3 className="text-[1.2rem] sm:text-[1.4rem] text-[#2C2C2C]" style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 500 }}>Special Offers — Men</h3>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8 p-5 sm:p-6 pt-4">
+                <ul className="divide-y divide-[#EDEAE4] rounded-lg overflow-hidden bg-[#FBFAF8]">
+                  <PriceRow name="Chest + Abdomen + Shoulders" price="€160" />
+                  <PriceRow name="Full Back + Arms" price="€160" />
+                </ul>
+                <ul className="divide-y divide-[#EDEAE4] rounded-lg overflow-hidden bg-[#FBFAF8]">
+                  <PriceRow name="Full Back + Arms + Chest + Abdomen" price="€180" />
+                  <PriceRow name="Full Body" price="€300" />
+                </ul>
+              </div>
+            </div>
+          </FadeIn>
         </div>
       </section>
 
-      <section className="section-padding bg-[#F9F6F0] text-center">
-        <FadeIn className="max-w-2xl mx-auto">
+      {/* ════════════════════════════════
+          TATTOO REMOVAL + CARBON PEELING
+      ════════════════════════════════ */}
+      <section className="section-padding bg-[#F9F6F0]">
+        <div className="site-container">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-10">
+            <div>
+              <FadeIn className="text-center mb-8">
+                <p className="text-[0.62rem] tracking-[0.28em] uppercase text-[#C9A84C] mb-3" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500 }}>Per Session</p>
+                <h2 className="text-[2rem] sm:text-[2.4rem] text-[#2C2C2C] mb-4" style={{ fontFamily: "'Cormorant Garamond', serif" }}>Tattoo Removal</h2>
+                <div className="gold-divider" />
+              </FadeIn>
+              <PriceCard
+                title="Tattoo & Permanent Makeup"
+                icon="✦"
+                delay={80}
+                items={[
+                  { name: 'Permanent Makeup Removal (30 min)', price: '€79' },
+                  { name: 'Small Tattoo (1–5 cm)', price: '€60' },
+                  { name: 'Medium Tattoo (6–15 cm) — Line Only', price: '€80' },
+                  { name: 'Medium Tattoo (6–15 cm) — Colour / Shading', price: '€120' },
+                  { name: 'Large Tattoo (16–25 cm) — Line Only', price: '€120' },
+                  { name: 'Large Tattoo (16–25 cm) — Colour / Shading', price: '€160' },
+                ]}
+              />
+            </div>
+
+            <div>
+              <FadeIn className="text-center mb-8">
+                <p className="text-[0.62rem] tracking-[0.28em] uppercase text-[#C9A84C] mb-3" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500 }}>Per Session</p>
+                <h2 className="text-[2rem] sm:text-[2.4rem] text-[#2C2C2C] mb-4" style={{ fontFamily: "'Cormorant Garamond', serif" }}>Carbon Peeling</h2>
+                <div className="gold-divider" />
+              </FadeIn>
+              <PriceCard
+                title="Hollywood Facial Peel"
+                icon="◈"
+                delay={120}
+                items={[
+                  { name: 'Full Face', price: '€50' },
+                  { name: 'Neckline', price: '€45' },
+                  { name: 'Full Face + Neckline', price: '€75' },
+                ]}
+              />
+            </div>
+          </div>
+
+          <FadeIn delay={200} className="mt-10 text-center">
+            <p className="text-sm text-[#7A7370] italic" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300 }}>
+              * All prices are per session. A patch test is required prior to laser treatments at no extra charge.
+              Multiple sessions are recommended for optimal results.
+            </p>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* ── CTA ── */}
+      <section className="section-padding bg-[#F4EFE8] text-center">
+        <div className="site-container">
+          <FadeIn className="mx-auto max-w-2xl">
           <p className="text-[1rem] text-[#7A7370] mb-10" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300, lineHeight: 1.85 }}>
-            Not sure which option suits you? Book a free consultation and I will recommend the most effective and cost-efficient plan for your goals.
+            Not sure which option suits you? Book a free consultation and I will recommend the most effective plan for your goals.
           </p>
           <Link href="/contact" className="btn btn-primary">
             Book Free Consultation <ArrowRight size={14} />
           </Link>
-        </FadeIn>
+          </FadeIn>
+        </div>
       </section>
     </>
   );

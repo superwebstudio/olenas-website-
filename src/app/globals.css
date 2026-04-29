@@ -2,34 +2,36 @@
 @import "tailwindcss";
 
 :root {
-  --ivory:          #F9F6F0;
-  --cream:          #F4EFE8;
-  --emerald:        #2D6A4F;
-  --emerald-light:  #40916C;
-  --emerald-dark:   #1B4332;
-  --gold:           #C9A84C;
-  --gold-light:     #E0C068;
-  --charcoal:       #2C2C2C;
-  --warm-gray:      #7A7370;
-  --border:         #E8E0D5;
+  --ivory: #F9F6F0;
+  --cream: #F4EFE8;
+  --emerald: #2D6A4F;
+  --emerald-light: #40916C;
+  --emerald-dark: #1B4332;
+  --gold: #C9A84C;
+  --gold-light: #E0C068;
+  --charcoal: #2C2C2C;
+  --warm-gray: #7A7370;
+  --border: #E8E0D5;
 }
 
 @theme {
-  --color-ivory:         #F9F6F0;
-  --color-cream:         #F4EFE8;
-  --color-emerald:       #2D6A4F;
+  --color-ivory: #F9F6F0;
+  --color-cream: #F4EFE8;
+  --color-emerald: #2D6A4F;
   --color-emerald-light: #40916C;
-  --color-emerald-dark:  #1B4332;
-  --color-gold:          #C9A84C;
-  --color-gold-light:    #E0C068;
-  --color-charcoal:      #2C2C2C;
-  --color-warm-gray:     #7A7370;
-  --color-border:        #E8E0D5;
-  --font-serif:          'Cormorant Garamond', Georgia, serif;
-  --font-sans:           'Jost', system-ui, sans-serif;
+  --color-emerald-dark: #1B4332;
+  --color-gold: #C9A84C;
+  --color-gold-light: #E0C068;
+  --color-charcoal: #2C2C2C;
+  --color-warm-gray: #7A7370;
+  --color-border: #E8E0D5;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Jost', system-ui, sans-serif;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -49,7 +51,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
   font-family: 'Cormorant Garamond', Georgia, serif;
   font-weight: 400;
   line-height: 1.15;
@@ -60,7 +65,7 @@ p {
   line-height: 1.85;
 }
 
-p + p {
+p+p {
   margin-top: 1.25rem;
 }
 
@@ -69,24 +74,48 @@ a {
   text-decoration: none;
 }
 
-/* ── Section spacing ── */
-.section-padding {
-  padding: 5.5rem 1.5rem;
-}
-@media (min-width: 640px) {
-  .section-padding { padding-left: 2rem; padding-right: 2rem; }
-}
-@media (min-width: 768px) {
-  .section-padding { padding-top: 7.5rem; padding-bottom: 7.5rem; }
+/* ── Canonical centered column — matches header / footer max width ── */
+.site-container {
+  width: 100%;
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(1rem, 4vw, 2.5rem);
+  padding-right: clamp(1rem, 4vw, 2.5rem);
 }
 
-/* ── Page hero ── shared across interior pages */
+@media (min-width: 1024px) {
+  .site-container {
+    padding-left: clamp(1.75rem, 5vw, 3rem);
+    padding-right: clamp(1.75rem, 5vw, 3rem);
+  }
+}
+
+/* ── Section spacing (vertical only — horizontal from .site-container) ── */
+.section-padding {
+  padding-top: 5.5rem;
+  padding-bottom: 5.5rem;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding-top: 7.5rem;
+    padding-bottom: 7.5rem;
+  }
+}
+
+/* ── Page hero — vertical rhythm only; use .site-container inside ── */
 .page-hero {
-  padding: 10rem 1.5rem 4rem;
+  padding-top: 10rem;
+  padding-bottom: 4rem;
   position: relative;
 }
+
 @media (min-width: 640px) {
-  .page-hero { padding: 11rem 2rem 4.5rem; }
+  .page-hero {
+    padding-top: 11rem;
+    padding-bottom: 4.5rem;
+  }
 }
 
 /* ── Gold divider ── */
@@ -121,23 +150,32 @@ a {
   background-color: var(--emerald);
   color: #fff;
 }
-.btn-primary:hover { background-color: var(--emerald-dark); }
+
+.btn-primary:hover {
+  background-color: var(--emerald-dark);
+}
 
 .btn-outline {
-  background: transparent;
-  border: 1px solid var(--emerald);
+  background: rgba(45, 106, 79, 0.07);
+  border: none;
   color: var(--emerald);
+  box-shadow: 0 1px 3px rgba(45, 106, 79, 0.12);
 }
+
 .btn-outline:hover {
   background-color: var(--emerald);
   color: #fff;
+  box-shadow: 0 4px 14px rgba(27, 67, 50, 0.25);
 }
 
 .btn-gold {
   background-color: var(--gold);
   color: var(--emerald-dark);
 }
-.btn-gold:hover { background-color: var(--gold-light); }
+
+.btn-gold:hover {
+  background-color: var(--gold-light);
+}
 
 /* Hide any injected Netlify identity floating widget */
 iframe[src*="netlify"],
@@ -149,6 +187,15 @@ iframe[src*="netlify"],
 }
 
 /* ── Custom scrollbar ── */
-::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: var(--ivory); }
-::-webkit-scrollbar-thumb { background: var(--emerald); border-radius: 3px; }
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--ivory);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--emerald);
+  border-radius: 3px;
+}

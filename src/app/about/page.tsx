@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
-import olenaImg from '@/images/olena.png';
+import olenaImg from '@/images/olena.jpg';
 
 function FadeIn({ children, delay = 0, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -50,8 +50,9 @@ export default function AboutPage() {
           <div className="absolute inset-0 bg-gradient-to-l from-[#F4EFE8]/30 via-[#F4EFE8]/70 to-[#F4EFE8]" />
         </div>
         <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 70% 30%, rgba(45,106,79,0.1) 0%, transparent 60%)' }} />
-        <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 w-[420px] h-[420px] rounded-full border border-[#C9A84C]/15" />
-        <div className="max-w-3xl mx-auto text-center relative">
+        <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 w-[420px] h-[420px] rounded-full bg-[radial-gradient(circle,rgba(201,168,76,0.08)_0%,transparent_68%)] pointer-events-none" />
+        <div className="site-container relative text-center">
+          <div className="relative mx-auto max-w-3xl">
           <p className="text-[0.62rem] tracking-[0.28em] uppercase text-[#C9A84C] mb-5" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500 }}>
             Get to Know Me
           </p>
@@ -62,17 +63,16 @@ export default function AboutPage() {
           <p className="text-[1rem] text-[#7A7370] max-w-lg mx-auto" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300, lineHeight: 1.85 }}>
             Specialist in advanced aesthetic treatments with a passion for helping every client feel their very best.
           </p>
+          </div>
         </div>
       </section>
 
       <section className="section-padding bg-[#F9F6F0]">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+        <div className="site-container grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <FadeIn>
             <div className="relative">
-              <div className="aspect-[3/4] relative overflow-hidden border border-[#E8E0D5] shadow-[0_18px_44px_rgba(35,35,35,0.08)]">
+              <div className="aspect-[3/4] relative overflow-hidden shadow-[0_22px_56px_rgba(35,35,35,0.12)]">
                 <Image src={olenaImg} alt="Olena — Aesthetic Specialist" fill className="object-cover object-center" sizes="(max-width: 1024px) 100vw, 50vw" priority />
-                <div className="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-[#C9A84C] z-10" />
-                <div className="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-[#C9A84C] z-10" />
               </div>
               <div className="absolute -bottom-8 -right-8 bg-[#2D6A4F] p-6 text-white hidden sm:block z-10">
                 <p className="text-3xl mb-0.5" style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 400 }}>8+</p>
@@ -108,7 +108,7 @@ export default function AboutPage() {
       </section>
 
       <section className="section-padding bg-[#F4EFE8]">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+        <div className="site-container grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           <FadeIn>
             <p className="text-[0.62rem] tracking-[0.28em] uppercase text-[#C9A84C] mb-5" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500 }}>
               Qualifications
@@ -116,7 +116,7 @@ export default function AboutPage() {
             <h2 className="text-[2.2rem] sm:text-[2.8rem] text-[#2C2C2C] mb-8 leading-tight" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
               Trained to the<br />Highest Standards
             </h2>
-            <ul className="space-y-4 bg-[#F9F6F0] border border-[#E8E0D5] p-6 sm:p-10">
+            <ul className="space-y-4 rounded-2xl bg-[#F9F6F0] shadow-[0_10px_36px_rgba(0,0,0,0.05)] p-6 sm:p-10">
               {credentials.map((c) => (
                 <li key={c} className="flex items-start gap-3">
                   <CheckCircle2 size={16} className="text-[#2D6A4F] mt-0.5 shrink-0" />
@@ -130,7 +130,7 @@ export default function AboutPage() {
             <p className="text-[0.62rem] tracking-[0.28em] uppercase text-[#C9A84C] mb-5" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500 }}>
               My Values
             </p>
-            <div className="space-y-6 bg-[#F9F6F0] border border-[#E8E0D5] p-6 sm:p-10">
+            <div className="space-y-6 rounded-2xl bg-[#F9F6F0] shadow-[0_10px_36px_rgba(0,0,0,0.05)] p-6 sm:p-10">
               {values.map((v, i) => (
                 <div key={v.title} className="flex gap-4">
                   <span className="text-[#C9A84C] text-lg mt-0.5 shrink-0" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
@@ -148,7 +148,8 @@ export default function AboutPage() {
       </section>
 
       <section className="section-padding bg-[#2C2C2C] text-center">
-        <FadeIn className="max-w-xl mx-auto">
+        <div className="site-container">
+          <FadeIn className="mx-auto max-w-xl">
           <h2 className="text-[2.4rem] sm:text-[3rem] text-[#F9F6F0] mb-5" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
             Let&apos;s Work Together
           </h2>
@@ -160,6 +161,7 @@ export default function AboutPage() {
             Book Now <ArrowRight size={14} />
           </Link>
         </FadeIn>
+        </div>
       </section>
     </>
   );

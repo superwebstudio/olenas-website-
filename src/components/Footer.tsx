@@ -37,10 +37,7 @@ export default function Footer() {
   return (
     <footer style={{ backgroundColor: '#1e1e1e', color: '#F9F6F0' }}>
 
-      <div
-        className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12"
-        style={{ padding: '5rem 1.5rem' }}
-      >
+      <div className="site-container grid grid-cols-1 gap-12 py-20 md:grid-cols-3 md:gap-16">
         <div>
           <h3
             className="text-3xl mb-1"
@@ -68,7 +65,7 @@ export default function Footer() {
             Advanced aesthetic and beauty treatments to help you achieve healthy, confident-looking skin.
           </p>
           <a
-            href="https://instagram.com"
+            href="https://instagram.com/shevchenko_laserremoval"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 mt-7 text-[#C9A84C] hover:text-[#E0C068] transition-colors duration-200"
@@ -77,12 +74,12 @@ export default function Footer() {
             <span
               style={{ fontFamily: "'Jost', sans-serif", fontWeight: 400, fontSize: '0.68rem', letterSpacing: '0.18em', textTransform: 'uppercase' }}
             >
-              @olena.aesthetics
+              @shevchenko_laserremoval
             </span>
           </a>
         </div>
 
-        <div className="md:border-l md:border-[#2a2a2a] md:pl-10">
+        <div className="md:pl-4 lg:pl-8">
           <h4
             className="mb-7"
             style={{
@@ -107,7 +104,7 @@ export default function Footer() {
           </ul>
         </div>
 
-        <div className="md:border-l md:border-[#2a2a2a] md:pl-10">
+        <div className="md:pl-4 lg:pl-8">
           <h4
             className="mb-7"
             style={{
@@ -124,9 +121,9 @@ export default function Footer() {
           <ul className="space-y-4">
             <li className="flex items-start gap-3">
               <span className="mt-0.5 shrink-0 text-[#C9A84C]"><PhoneIcon /></span>
-              <span className={linkClass} style={linkStyle}>
-                Phone available on request
-              </span>
+              <a href="tel:+447909281859" className={linkClass} style={linkStyle}>
+                +44 7909 281859
+              </a>
             </li>
             <li className="flex items-start gap-3">
               <Mail size={15} className="mt-0.5 shrink-0 text-[#C9A84C]" />
@@ -137,15 +134,15 @@ export default function Footer() {
             <li className="flex items-start gap-3">
               <MapPin size={15} className="mt-0.5 shrink-0 text-[#C9A84C]" />
               <span className="text-sm" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300, color: '#9c9490' }}>
-                Dublin, Ireland
+                Royal Mail House, Terminus Terrace, Southampton SO14 3FD
               </span>
             </li>
           </ul>
         </div>
       </div>
 
-      <div style={{ borderTop: '1px solid #2a2a2a', padding: '1.5rem' }}>
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-3">
+      <div className="pt-10 pb-6" style={{ boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.05)' }}>
+        <div className="site-container flex flex-col items-center justify-between gap-3 sm:flex-row">
           <p
             className="text-xs"
             style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300, color: '#5a5452' }}

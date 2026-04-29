@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useState, useEffect, useRef } from 'react';
 import { Phone, Mail, MapPin, Clock, CheckCircle2 } from 'lucide-react';
-import olenaImg from '@/images/olena.png';
+import olenaImg from '@/images/olena.jpg';
 
 function InstagramIcon({ size = 14 }: { size?: number }) {
   return (
@@ -37,9 +37,9 @@ function FadeIn({ children, delay = 0, className = '' }: { children: React.React
 
 const treatmentOptions = [
   'Laser Hair Removal',
-  'Skin Rejuvenation',
-  'Facial Treatment',
-  'Brow & Lash',
+  'RF Microneedling',
+  'Tattoo Removal',
+  'Carbon Peeling (Hollywood Peel)',
   'Not sure — need advice',
 ];
 
@@ -67,7 +67,7 @@ export default function ContactPage() {
   }
 
   const inputClass =
-    'w-full bg-white border border-[#E8E0D5] px-4 py-3.5 text-sm text-[#2C2C2C] placeholder:text-[#b0a89e] focus:outline-none focus:border-[#2D6A4F] transition-colors duration-200 rounded-lg sm:rounded-none';
+    'w-full border-0 bg-white px-4 py-3.5 text-sm text-[#2C2C2C] placeholder:text-[#b0a89e] shadow-[0_1px_4px_rgba(0,0,0,0.06)] focus:outline-none focus:ring-2 focus:ring-[#2D6A4F]/25 transition-[box-shadow] duration-200 rounded-lg sm:rounded-none';
 
   return (
     <>
@@ -77,7 +77,8 @@ export default function ContactPage() {
           <div className="absolute inset-0 bg-gradient-to-l from-[#F4EFE8]/30 via-[#F4EFE8]/70 to-[#F4EFE8]" />
         </div>
         <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 30% 60%, rgba(45,106,79,0.12) 0%, transparent 60%)' }} />
-        <div className="max-w-3xl mx-auto text-center relative">
+        <div className="site-container relative text-center">
+          <div className="relative mx-auto max-w-3xl">
           <p className="text-[0.62rem] tracking-[0.28em] uppercase text-[#C9A84C] mb-5" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500 }}>
             Get in Touch
           </p>
@@ -88,11 +89,12 @@ export default function ContactPage() {
           <p className="text-[1rem] text-[#7A7370] max-w-lg mx-auto" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300, lineHeight: 1.85 }}>
             Fill in the form below or contact me directly — I will get back to you within 24 hours to confirm your booking.
           </p>
+          </div>
         </div>
       </section>
 
       <section className="section-padding bg-[#F9F6F0]">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-12">
+        <div className="site-container grid grid-cols-1 lg:grid-cols-5 gap-12">
           <FadeIn className="lg:col-span-2 space-y-8">
             <div>
               <p className="text-[0.62rem] tracking-[0.28em] uppercase text-[#C9A84C] mb-6" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500 }}>
@@ -100,18 +102,18 @@ export default function ContactPage() {
               </p>
               <ul className="space-y-5">
                 <li className="flex items-start gap-4">
-                  <div className="w-9 h-9 border border-[#E8E0D5] flex items-center justify-center shrink-0 rounded-lg sm:rounded-none">
+                  <div className="w-9 h-9 bg-[#EDE8DF]/90 flex items-center justify-center shrink-0 rounded-lg sm:rounded-none shadow-[inset_0_1px_0_rgba(255,255,255,0.5)]">
                     <Phone size={14} className="text-[#2D6A4F]" />
                   </div>
                   <div>
                     <p className="text-xs tracking-widest uppercase text-[#7A7370] mb-1" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300 }}>Phone</p>
-                    <span className="text-sm text-[#2C2C2C]" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 400 }}>
-                      Phone available on request
-                    </span>
+                    <a href="tel:+447909281859" className="text-sm text-[#2C2C2C] hover:text-[#2D6A4F] transition-colors" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 400 }}>
+                      +44 7909 281859
+                    </a>
                   </div>
                 </li>
                 <li className="flex items-start gap-4">
-                  <div className="w-9 h-9 border border-[#E8E0D5] flex items-center justify-center shrink-0 rounded-lg sm:rounded-none">
+                  <div className="w-9 h-9 bg-[#EDE8DF]/90 flex items-center justify-center shrink-0 rounded-lg sm:rounded-none shadow-[inset_0_1px_0_rgba(255,255,255,0.5)]">
                     <Mail size={14} className="text-[#2D6A4F]" />
                   </div>
                   <div>
@@ -122,23 +124,23 @@ export default function ContactPage() {
                   </div>
                 </li>
                 <li className="flex items-start gap-4">
-                  <div className="w-9 h-9 border border-[#E8E0D5] flex items-center justify-center shrink-0 rounded-lg sm:rounded-none">
+                  <div className="w-9 h-9 bg-[#EDE8DF]/90 flex items-center justify-center shrink-0 rounded-lg sm:rounded-none shadow-[inset_0_1px_0_rgba(255,255,255,0.5)]">
                     <MapPin size={14} className="text-[#2D6A4F]" />
                   </div>
                   <div>
                     <p className="text-xs tracking-widest uppercase text-[#7A7370] mb-1" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300 }}>Location</p>
-                    <p className="text-sm text-[#2C2C2C]" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 400 }}>Dublin, Ireland</p>
-                    <p className="text-xs text-[#7A7370] mt-0.5" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300 }}>Exact address shared upon booking</p>
+                    <p className="text-sm text-[#2C2C2C]" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 400 }}>Royal Mail House, Terminus Terrace</p>
+                    <p className="text-xs text-[#7A7370] mt-0.5" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300 }}>Southampton SO14 3FD</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-4">
-                  <div className="w-9 h-9 border border-[#E8E0D5] flex items-center justify-center shrink-0 rounded-lg sm:rounded-none">
+                  <div className="w-9 h-9 bg-[#EDE8DF]/90 flex items-center justify-center shrink-0 rounded-lg sm:rounded-none shadow-[inset_0_1px_0_rgba(255,255,255,0.5)]">
                     <InstagramIcon size={14} />
                   </div>
                   <div>
                     <p className="text-xs tracking-widest uppercase text-[#7A7370] mb-1" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300 }}>Instagram</p>
-                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-sm text-[#2C2C2C] hover:text-[#2D6A4F] transition-colors" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 400 }}>
-                      @olena.aesthetics
+                    <a href="https://instagram.com/shevchenko_laserremoval" target="_blank" rel="noopener noreferrer" className="text-sm text-[#2C2C2C] hover:text-[#2D6A4F] transition-colors" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 400 }}>
+                      @shevchenko_laserremoval
                     </a>
                   </div>
                 </li>
@@ -162,7 +164,7 @@ export default function ContactPage() {
               </ul>
             </div>
 
-            <div className="border border-[#E8E0D5] p-5 sm:p-6 bg-[#F4EFE8] rounded-xl sm:rounded-none">
+            <div className="p-5 sm:p-6 bg-[#F4EFE8] rounded-xl sm:rounded-none shadow-[0_8px_32px_rgba(0,0,0,0.06)]">
               <p className="text-base text-[#2C2C2C] mb-4" style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 500 }}>What to expect</p>
               {['I will reply within 24 hours', 'Free skin consultation included', 'Patch test arranged if needed', 'Flexible appointment times'].map((item) => (
                 <div key={item} className="flex items-center gap-2 mb-2">
@@ -175,8 +177,8 @@ export default function ContactPage() {
 
           <FadeIn delay={150} className="lg:col-span-3">
             {submitted ? (
-              <div className="flex flex-col items-center justify-center h-full min-h-[480px] text-center p-8 sm:p-10 border border-[#E8E0D5] bg-white rounded-xl sm:rounded-none">
-                <div className="w-16 h-16 rounded-full border-2 border-[#2D6A4F] flex items-center justify-center mb-6">
+              <div className="flex flex-col items-center justify-center h-full min-h-[480px] text-center p-8 sm:p-10 bg-white rounded-xl sm:rounded-none shadow-[0_12px_40px_rgba(0,0,0,0.08)]">
+                <div className="w-16 h-16 rounded-full bg-[#2D6A4F]/12 flex items-center justify-center mb-6">
                   <CheckCircle2 size={28} className="text-[#2D6A4F]" />
                 </div>
                 <h2 className="text-[1.8rem] text-[#2C2C2C] mb-3" style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 400 }}>
@@ -188,7 +190,7 @@ export default function ContactPage() {
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="border border-[#E8E0D5] bg-white p-6 sm:p-10 space-y-5 rounded-xl sm:rounded-none">
+              <form onSubmit={handleSubmit} className="bg-white p-6 sm:p-10 space-y-5 rounded-xl sm:rounded-none shadow-[0_12px_40px_rgba(0,0,0,0.07)]">
                 <h2 className="text-[1.8rem] text-[#2C2C2C] mb-6" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
                   Booking Enquiry
                 </h2>
@@ -207,7 +209,7 @@ export default function ContactPage() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
                     <label className="block text-[0.58rem] tracking-[0.18em] uppercase text-[#7A7370] mb-2" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500 }}>Phone Number</label>
-                    <input type="tel" name="phone" value={form.phone} onChange={handleChange} placeholder="+353 ..." className={inputClass} style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300 }} />
+                    <input type="tel" name="phone" value={form.phone} onChange={handleChange} placeholder="+44 ..." className={inputClass} style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300 }} />
                   </div>
                   <div>
                     <label className="block text-[0.58rem] tracking-[0.18em] uppercase text-[#7A7370] mb-2" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500 }}>Treatment Interest</label>
