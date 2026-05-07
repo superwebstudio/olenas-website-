@@ -1,10 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
-import olenaImg from '@/images/olena.jpg';
 
 function FadeIn({ children, delay = 0, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -65,14 +63,9 @@ export default function PricesPage() {
   return (
     <>
       {/* ── Hero ── */}
-      <section className="page-hero bg-[#F4EFE8] overflow-hidden">
-        <div className="absolute inset-y-0 right-0 hidden md:block w-[34%] opacity-35">
-          <Image src={olenaImg} alt="" fill sizes="34vw" className="object-cover object-top" aria-hidden="true" />
-          <div className="absolute inset-0 bg-gradient-to-l from-[#F4EFE8]/30 via-[#F4EFE8]/70 to-[#F4EFE8]" />
-        </div>
-        <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 40% 60%, rgba(201,168,76,0.15) 0%, transparent 60%)' }} />
-        <div className="site-container relative text-center">
-          <div className="relative mx-auto max-w-3xl">
+      <section className="page-hero bg-[#F4EFE8]">
+        <div className="site-container text-center">
+          <div className="mx-auto max-w-3xl">
           <p className="text-[0.62rem] tracking-[0.28em] uppercase text-[#C9A84C] mb-5" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500 }}>
             Transparent Pricing
           </p>
@@ -281,8 +274,8 @@ export default function PricesPage() {
 
       {/* ── CTA ── */}
       <section className="section-padding bg-[#F4EFE8] text-center">
-        <div className="site-container">
-          <FadeIn className="mx-auto max-w-2xl">
+        <div className="site-container text-center">
+          <FadeIn className="mx-auto w-full max-w-2xl text-center">
           <p className="text-[1rem] text-[#7A7370] mb-10" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300, lineHeight: 1.85 }}>
             Not sure which option suits you? Book a free consultation and I will recommend the most effective plan for your goals.
           </p>

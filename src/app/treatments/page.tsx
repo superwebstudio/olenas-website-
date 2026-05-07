@@ -5,10 +5,8 @@ import Image from 'next/image';
 import type { StaticImageData } from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Check } from 'lucide-react';
-import olenaImg from '@/images/olena.jpg';
 import laserImg from '@/images/laser_hair_removal.jpg';
-import armpitBeforeImg from '@/images/laser_hair_removal_armpit_before.jpg';
-import armpitAfterImg from '@/images/laser_hair_removal_armpit_after.jpg';
+import skinBeforeAfterImg from '@/images/photo_8_2026-04-29_19-37-15.jpg';
 
 type DetailCard = {
   title: string;
@@ -58,7 +56,7 @@ function CheckItem({ text }: { text: string }) {
 function TreatmentHeader({ number, title, subtitle }: { number: string; title: string; subtitle?: string }) {
   return (
     <FadeIn className="mb-10 sm:mb-14">
-      <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+      <div className="flex flex-col gap-4">
         <div>
           <p className="mb-3 text-[0.62rem] tracking-[0.3em] uppercase text-[#2D6A4F]" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500 }}>
             {number}
@@ -68,7 +66,7 @@ function TreatmentHeader({ number, title, subtitle }: { number: string; title: s
           </h2>
         </div>
         {subtitle && (
-          <p className="max-w-sm text-[1rem] text-[#6D6763]" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300, lineHeight: 1.75 }}>
+          <p className="max-w-2xl text-[1rem] text-[#6D6763]" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300, lineHeight: 1.75 }}>
             {subtitle}
           </p>
         )}
@@ -123,11 +121,25 @@ function SummaryPanel({ title, text, areas, cta = 'Book this treatment' }: { tit
   );
 }
 
-function ResultImage({ src, alt, label }: { src: StaticImageData; alt: string; label: string }) {
+function ResultImage({
+  src,
+  alt,
+  label,
+  aspectClassName = 'aspect-[4/5]',
+  wrapperClassName = '',
+  sizes = '(max-width: 640px) 90vw, min(896px, 90vw)',
+}: {
+  src: StaticImageData;
+  alt: string;
+  label: string;
+  aspectClassName?: string;
+  wrapperClassName?: string;
+  sizes?: string;
+}) {
   return (
-    <div>
-      <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-[#F8F5EF]">
-        <Image src={src} alt={alt} fill className="object-cover" sizes="(max-width: 640px) 90vw, 280px" />
+    <div className={wrapperClassName}>
+      <div className={`relative overflow-hidden rounded-2xl bg-[#F8F5EF] ${aspectClassName}`}>
+        <Image src={src} alt={alt} fill className="object-cover object-center" sizes={sizes} />
       </div>
       <p className="mt-3 text-center text-[0.62rem] tracking-[0.2em] uppercase text-[#5F5A56]" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500 }}>{label}</p>
     </div>
@@ -138,38 +150,25 @@ export default function TreatmentsPage() {
   return (
     <>
       {/* ── Hero ── */}
-      <section className="page-hero bg-white overflow-hidden">
-        <div className="absolute inset-y-0 right-0 hidden md:block w-[34%] opacity-35">
-          <Image src={olenaImg} alt="" fill sizes="34vw" className="object-cover object-top" aria-hidden="true" />
-          <div className="absolute inset-0 bg-gradient-to-l from-white/30 via-white/80 to-white" />
-        </div>
-        <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 60% 40%, rgba(45,106,79,0.12) 0%, transparent 60%)' }} />
-        <div className="site-container relative text-center">
-          <div className="relative mx-auto max-w-3xl">
-          <p className="text-[0.62rem] tracking-[0.28em] uppercase text-[#2D6A4F] mb-5" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500 }}>
-            What We Offer
-          </p>
-          <h1 className="text-[2.8rem] sm:text-[3.5rem] text-[#2C2C2C] mb-6" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
-            Our <em className="text-[#2D6A4F]">Treatments</em>
-          </h1>
+      <section className="page-hero bg-white">
+        <div className="site-container text-center">
+          <p className="text-[0.62rem] tracking-[0.28em] uppercase text-[#2D6A4F] mb-5" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500 }}>What We Offer</p>
+          <h1 className="text-[2.8rem] sm:text-[3.5rem] text-[#2C2C2C] mb-6" style={{ fontFamily: "'Cormorant Garamond', serif" }}>Our <em className="text-[#2D6A4F]">Treatments</em></h1>
           <div className="mx-auto mb-8 h-px w-12 bg-[#2D6A4F]" />
-          <p className="text-[1.05rem] text-[#5F5A56] max-w-xl mx-auto" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300, lineHeight: 1.9 }}>
-            Advanced aesthetic treatments delivered with clinical expertise and a fully personalised approach.
-          </p>
-          </div>
+          <p className="text-[1.05rem] text-[#5F5A56] max-w-xl mx-auto" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300, lineHeight: 1.9 }}>Clinical treatments, tailored to you.</p>
         </div>
       </section>
 
       <section id="laser" className="bg-white pb-20 pt-14 sm:pb-28 sm:pt-20">
         <div className="site-container">
-          <TreatmentHeader number="01" title="Laser Hair Removal" subtitle="Long-term reduction for smoother skin, with professional settings tailored to your skin and hair type." />
+          <TreatmentHeader number="01" title="Laser Hair Removal" subtitle="Long-term hair reduction, matched to your skin and hair type." />
 
           <div className="grid grid-cols-1 gap-10 sm:gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
             <FadeIn delay={80}>
               <SummaryPanel
                 title="Clinical-grade hair reduction"
-                text="Laser energy is absorbed by pigment in the hair follicle, weakening its ability to grow new hair. Because hair grows in cycles, a course of sessions is needed for best results."
-                areas={['Face & neck', 'Underarms', 'Bikini / Brazilian / Hollywood', 'Arms & legs', 'Chest, back & abdomen', 'Buttocks']}
+                text="Laser targets pigment in the follicle; several sessions follow your hair growth cycle for lasting reduction."
+                areas={['Face & neck', 'Underarms', 'Bikini line', 'Arms & legs', 'Back & chest']}
               />
             </FadeIn>
 
@@ -178,10 +177,8 @@ export default function TreatmentsPage() {
                 <DetailCardView
                   title="What changes over time"
                   bullets={[
-                    'Hair becomes finer and lighter with each session',
-                    'Growth slows down significantly over the course of treatment',
-                    'Regrowth becomes progressively less noticeable',
-                    'Long-term hair reduction, not just temporary removal',
+                    'Finer, slower regrowth over sessions',
+                    'Lasting reduction—not a quick shave',
                   ]}
                 />
               </FadeIn>
@@ -190,17 +187,15 @@ export default function TreatmentsPage() {
                 <FadeIn delay={190}>
                   <DetailCardView
                     title="After Treatment"
-                    body="There is no downtime. Mild redness or slight swelling may appear and normally settles quickly. Treated hairs shed naturally over the following days."
+                    body="No downtime. Mild redness can fade quickly; hairs shed in the days after."
                   />
                 </FadeIn>
                 <FadeIn delay={220}>
                   <DetailCardView
                     title="Aftercare"
                     bullets={[
-                      'Avoid sun exposure and tanning beds',
-                      'Avoid sauna or hot baths immediately after',
-                      'Keep skin clean and hydrated',
-                      'Use daily SPF on treated areas',
+                      'Sun & tanning: avoid until advised',
+                      'SPF daily on treated areas',
                     ]}
                   />
                 </FadeIn>
@@ -210,11 +205,8 @@ export default function TreatmentsPage() {
                 <DetailCardView
                   title="Why Clients Choose It"
                   bullets={[
-                    'Long-term hair reduction',
-                    'Smoother, clearer skin',
-                    'No ingrown hairs',
-                    'No daily shaving or waxing',
-                    'More confidence and comfort',
+                    'Long-term reduction & smoother skin',
+                    'Less shaving, fewer ingrowns',
                   ]}
                 />
               </FadeIn>
@@ -225,10 +217,20 @@ export default function TreatmentsPage() {
             <div className="mx-auto max-w-4xl text-center">
               <p className="mb-3 text-[0.62rem] tracking-[0.26em] uppercase text-[#2D6A4F]" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500 }}>Real Results</p>
               <h3 className="mb-10 text-[2.4rem] text-[#2C2C2C]" style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 500 }}>Before &amp; After</h3>
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
-                <ResultImage src={armpitBeforeImg} alt="Underarms before laser hair removal" label="Before" />
-                <ResultImage src={armpitAfterImg} alt="Underarms after laser hair removal" label="After" />
-                <ResultImage src={laserImg} alt="Laser hair removal treatment in progress" label="Treatment" />
+              <div className="mx-auto grid max-w-4xl grid-cols-1 gap-8 sm:gap-10">
+                <ResultImage
+                  src={skinBeforeAfterImg}
+                  alt="Skin rejuvenation — before and after comparison"
+                  label="Before & after"
+                  aspectClassName="aspect-[16/11] sm:aspect-[16/10]"
+                  wrapperClassName="w-full"
+                />
+                <ResultImage
+                  src={laserImg}
+                  alt="Laser hair removal treatment in progress"
+                  label="Treatment"
+                  wrapperClassName="mx-auto w-full max-w-sm"
+                />
               </div>
             </div>
           </FadeIn>
@@ -237,29 +239,34 @@ export default function TreatmentsPage() {
 
       <section id="rf-microneedling" className="bg-white pb-20 pt-14 sm:pb-28 sm:pt-20">
         <div className="site-container">
-          <TreatmentHeader number="02" title="RF Microneedling" subtitle="Radiofrequency skin tightening for firmness, texture, fine lines and collagen stimulation." />
+          <TreatmentHeader number="02" title="RF Microneedling" subtitle="RF + microneedling for firmness, texture, and collagen." />
 
           <div className="grid grid-cols-1 gap-10 sm:gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
             <FadeIn delay={80}>
               <SummaryPanel
                 title="Skin tightening without surgery"
-                text="Ultra-fine needles and controlled radiofrequency energy work at precise depths to stimulate collagen and elastin. Results develop gradually as the skin regenerates."
-                areas={['Face', 'Neck & jawline', 'Décolletage', 'Body areas with skin laxity']}
+                text="Fine needles deliver RF at set depths to boost collagen; results build over weeks."
+                areas={['Face', 'Neck & jawline', 'Décolletage']}
               />
             </FadeIn>
 
-            <div className="space-y-6">
+            <div className="space-y-10 sm:space-y-12">
               <FadeIn delay={140}>
                 <DetailCardView
                   title="How It Works"
-                  body="The treatment improves skin structure from within, tightening and smoothing the skin over time. It is especially helpful for texture, scars, early laxity and fine lines."
+                  body="Improves texture, laxity, and lines from within—no surgery."
                 />
               </FadeIn>
 
+              <FadeIn delay={175}>
+                <p className="text-[0.65rem] tracking-[0.24em] uppercase text-[#2D6A4F]" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500 }}>
+                  Cartridge Comparison
+                </p>
+              </FadeIn>
               <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                 {[
-                  { number: '49', title: 'Larger Areas', bullets: ['Improves overall skin texture', 'Tightens loose skin', 'Enhances overall skin tone'] },
-                  { number: '25', title: 'Targeted Work', bullets: ['Works deeper into the skin', 'Ideal for wrinkles and acne scars', 'More focused correction'] },
+                  { number: '49', title: '49-Pin Cartridge', subtitle: 'Larger Areas', bullets: ['Smoother texture and tone across broader zones'] },
+                  { number: '25', title: '25-Pin Cartridge', subtitle: 'Targeted Work', bullets: ['Focused depth for fine lines and acne scars'] },
                 ].map((cartridge, index) => (
                   <FadeIn key={cartridge.number} delay={190 + index * 30}>
                     <SoftCard className="h-full">
@@ -268,8 +275,8 @@ export default function TreatmentsPage() {
                           {cartridge.number}
                         </span>
                         <div>
-                          <h3 className="text-[1.4rem] leading-tight text-[#2C2C2C]" style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 500 }}>Needle Cartridge</h3>
-                          <p className="mt-1 text-[0.62rem] tracking-[0.2em] uppercase text-[#2D6A4F]" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500 }}>{cartridge.title}</p>
+                          <h3 className="text-[1.35rem] leading-tight text-[#2C2C2C]" style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 500 }}>{cartridge.title}</h3>
+                          <p className="mt-1 text-[0.62rem] tracking-[0.2em] uppercase text-[#2D6A4F]" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500 }}>{cartridge.subtitle}</p>
                         </div>
                       </div>
                       <ul className="space-y-3">
@@ -280,40 +287,32 @@ export default function TreatmentsPage() {
                 ))}
               </div>
 
-              <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                <FadeIn delay={260}>
-                  <DetailCardView
-                    title="Results Timeline"
-                    bullets={[
-                      'Initial improvement may appear within a few weeks',
-                      'Full results develop around 4–8 weeks',
-                      'Skin can continue improving over time',
-                      'A course of sessions is recommended',
-                    ]}
-                  />
-                </FadeIn>
-                <FadeIn delay={290}>
-                  <DetailCardView
-                    title="Aftercare"
-                    bullets={[
-                      'Avoid sun exposure and use SPF daily',
-                      'Avoid makeup for 24 hours',
-                      'Avoid sauna, gym and hot showers for a few days',
-                      'Keep skin hydrated with gentle skincare',
-                    ]}
-                  />
-                </FadeIn>
-              </div>
+              <FadeIn delay={260}>
+                <DetailCardView
+                  title="Results Timeline"
+                  bullets={[
+                    'Early changes appear in a few weeks',
+                    'Peak results usually show around 4-8 weeks',
+                    'Best outcomes often come from a short course',
+                  ]}
+                />
+              </FadeIn>
+              <FadeIn delay={290}>
+                <DetailCardView
+                  title="Aftercare"
+                  bullets={[
+                    'Use SPF daily and avoid heat-intensive activity for a few days',
+                    'Avoid makeup for around 24 hours, then keep skin gently hydrated',
+                  ]}
+                />
+              </FadeIn>
 
               <FadeIn delay={320}>
                 <DetailCardView
                   title="Why Clients Choose It"
                   bullets={[
-                    'Non-surgical skin tightening',
-                    'Improved skin texture and tone',
-                    'Reduction of fine lines and wrinkles',
-                    'Effective for acne scars and uneven skin',
-                    'Natural collagen stimulation',
+                    'Non-surgical tightening & texture',
+                    'Natural collagen boost',
                   ]}
                 />
               </FadeIn>
@@ -324,34 +323,33 @@ export default function TreatmentsPage() {
 
       <section id="tattoo-removal" className="bg-white pb-20 pt-14 sm:pb-28 sm:pt-20">
         <div className="site-container">
-          <TreatmentHeader number="03" title="Tattoo Removal" subtitle="Laser removal for permanent makeup and small to large tattoos, including line work, colour and shading." />
+          <TreatmentHeader number="03" title="Tattoo Removal" subtitle="Laser removal for PMU and tattoos—line, colour, or shading." />
 
           <div className="grid grid-cols-1 gap-10 sm:gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
             <FadeIn delay={80}>
               <SummaryPanel
                 title="Precise laser pigment removal"
-                text="Treatments are performed safely and effectively with professional laser technology. A consultation helps assess pigment depth, colour and the likely number of sessions."
-                areas={['Permanent makeup', 'Small tattoos', 'Medium tattoos', 'Large tattoos', 'Line-only or shaded work']}
+                text="Consultation maps depth, colours, and a realistic session plan."
+                areas={['PMU', 'Small / medium / large tattoos']}
                 cta="Book a consultation"
               />
             </FadeIn>
 
             <div className="space-y-4">
               {[
-                { name: 'Permanent Makeup Removal', meta: '30 min', detail: 'For cosmetic tattoos including brows, liner and lips.' },
-                { name: 'Small Tattoo', meta: '1–5 cm', detail: 'Precise targeting for small tattoos with minimal impact on surrounding skin.' },
-                { name: 'Medium Tattoo — Line Only', meta: '6–15 cm', detail: 'Effective treatment for outline tattoos in the medium size range.' },
-                { name: 'Medium Tattoo — Colour / Shading', meta: '6–15 cm', detail: 'Extended treatment for medium tattoos containing colour or shading.' },
-                { name: 'Large Tattoo — Line Only', meta: '16–25 cm', detail: 'Full-coverage treatment for larger outline tattoos.' },
-                { name: 'Large Tattoo — Colour / Shading', meta: '16–25 cm', detail: 'Comprehensive treatment for large coloured or shaded tattoos.' },
+                { name: 'Permanent Makeup Removal', meta: '30 min' },
+                { name: 'Small Tattoo', meta: '1–5 cm' },
+                { name: 'Medium Tattoo — Line Only', meta: '6–15 cm' },
+                { name: 'Medium Tattoo — Colour / Shading', meta: '6–15 cm' },
+                { name: 'Large Tattoo — Line Only', meta: '16–25 cm' },
+                { name: 'Large Tattoo — Colour / Shading', meta: '16–25 cm' },
               ].map((item, index) => (
                 <FadeIn key={item.name} delay={130 + index * 40}>
-                  <div className="rounded-2xl bg-[#F8F5EF] px-5 py-6 transition-transform duration-200 hover:-translate-y-0.5 sm:p-7">
-                    <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-                      <h3 className="text-[1.45rem] leading-tight text-[#2C2C2C]" style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 500 }}>{item.name}</h3>
+                  <div className="rounded-2xl bg-[#F8F5EF] px-5 py-5 transition-transform duration-200 hover:-translate-y-0.5 sm:p-6">
+                    <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+                      <h3 className="text-[1.35rem] leading-tight text-[#2C2C2C]" style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 500 }}>{item.name}</h3>
                       <p className="text-[0.62rem] tracking-[0.2em] uppercase text-[#2D6A4F]" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500 }}>{item.meta}</p>
                     </div>
-                    <p className="mt-2 max-w-[64ch] text-[0.95rem] text-[#5F5A56]" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300, lineHeight: 1.75 }}>{item.detail}</p>
                   </div>
                 </FadeIn>
               ))}
@@ -362,14 +360,14 @@ export default function TreatmentsPage() {
 
       <section id="carbon-peeling" className="bg-white pb-20 pt-14 sm:pb-28 sm:pt-20">
         <div className="site-container">
-          <TreatmentHeader number="04" title="Carbon Peeling" subtitle="Also known as the Hollywood Facial Peel, designed for clearer pores, smoother texture and instant radiance." />
+          <TreatmentHeader number="04" title="Carbon Peeling" subtitle="The “Hollywood” peel—clearer pores, smoother skin, instant glow." />
 
           <div className="grid grid-cols-1 gap-10 sm:gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
             <FadeIn delay={80}>
               <SummaryPanel
                 title="Fresh, polished skin"
-                text="A non-invasive laser treatment that deeply cleanses pores, helps reduce oiliness and improves skin radiance with zero downtime."
-                areas={['Full face', 'Neckline', 'Full face + neckline']}
+                text="Non-invasive laser peel: deep pore cleanse, less oil, more radiance—no downtime."
+                areas={['Face', 'Neck', 'Face + neck']}
               />
             </FadeIn>
 
@@ -378,10 +376,7 @@ export default function TreatmentsPage() {
                 <DetailCardView
                   title="Why Clients Choose It"
                   bullets={[
-                    'Instant radiance and glow',
-                    'Deep pore cleansing',
-                    'Reduced oiliness and blackheads',
-                    'Improved skin texture and tone',
+                    'Glow + deep pore cleanse',
                     'Zero downtime',
                   ]}
                 />
@@ -389,9 +384,9 @@ export default function TreatmentsPage() {
 
               <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
                 {[
-                  { title: 'Full Face', text: 'Complete carbon peel treatment for a radiant, refreshed complexion.' },
-                  { title: 'Neckline', text: 'Targeted peel for the neck and décolletage area.' },
-                  { title: 'Face + Neckline', text: 'Combined treatment for a complete, glowing result.' },
+                  { title: 'Full Face', text: 'Full-face peel for instant radiance.' },
+                  { title: 'Neckline', text: 'Neck & décolletage refresh.' },
+                  { title: 'Face + Neckline', text: 'Head-to-neck glow in one visit.' },
                 ].map((item, index) => (
                   <FadeIn key={item.title} delay={190 + index * 40}>
                     <SoftCard className="h-full">
@@ -406,15 +401,15 @@ export default function TreatmentsPage() {
         </div>
       </section>
 
-      <section className="bg-[#F8F5EF] py-16 text-center sm:py-24">
-        <div className="site-container">
-          <FadeIn className="mx-auto max-w-2xl">
-          <p className="mb-4 text-[0.62rem] tracking-[0.28em] uppercase text-[#2D6A4F]" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500 }}>Need Advice?</p>
-          <h2 className="mb-6 text-[2.8rem] leading-none text-[#2C2C2C] sm:text-[3.4rem]" style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 500 }}>
+      <section className="section-padding bg-[#F8F5EF] text-center">
+        <div className="site-container text-center">
+          <FadeIn className="mx-auto w-full max-w-2xl text-center">
+          <p className="mb-5 text-[0.62rem] tracking-[0.28em] uppercase text-[#2D6A4F]" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500 }}>Need Advice?</p>
+          <h2 className="mb-8 text-[2.8rem] leading-tight text-[#2C2C2C] sm:text-[3.4rem]" style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 500 }}>
             Not Sure Which Treatment?
           </h2>
-          <p className="mx-auto mb-10 max-w-xl text-[1rem] text-[#5F5A56]" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300, lineHeight: 1.85 }}>
-            Book a free consultation and I will guide you to the treatment plan that best fits your skin, goals and schedule.
+          <p className="mx-auto mb-12 max-w-xl text-[1rem] text-[#5F5A56]" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300, lineHeight: 1.85 }}>
+            Free consult—I'll match a plan to your skin and goals.
           </p>
           <Link href="/contact" className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#2D6A4F] px-7 py-3.5 text-[0.7rem] tracking-[0.16em] uppercase text-white transition-all duration-200 hover:bg-[#1B4332] sm:w-auto" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500 }}>
             Book Free Consultation <ArrowRight size={14} />

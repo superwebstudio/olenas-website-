@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import olenaImg from '@/images/olena.jpg';
+import skinBeforeAfterImg from '@/images/photo_8_2026-04-29_19-37-15.jpg';
 
 /* ─── Inline SVG stars — fill always works ─── */
 function StarIcon({ size = 14, color = '#C9A84C' }: { size?: number; color?: string }) {
@@ -125,16 +126,6 @@ export default function HomePage() {
     <>
       {/* ══════════════ HERO ══════════════ */}
       <section className="relative min-h-screen bg-[#F4EFE8] flex flex-col">
-
-        {/* Subtle radial glow — no overflow-hidden so scroll cue stays visible */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            backgroundImage:
-              'radial-gradient(ellipse 70% 60% at 20% 55%, rgba(45,106,79,0.07) 0%, transparent 70%),' +
-              'radial-gradient(ellipse 50% 40% at 80% 20%, rgba(201,168,76,0.06) 0%, transparent 70%)',
-          }}
-        />
 
         {/* Content grid — image column wider than 50/50 so portrait hero crops less */}
         <div className="relative flex-1 grid grid-cols-1 lg:grid-cols-12 site-container">
@@ -261,17 +252,6 @@ export default function HomePage() {
               />
             </div>
 
-            {/* Stats badge floating bottom-left of image */}
-            <div
-              className="absolute bottom-12 left-1/2 z-10 -translate-x-1/2 rounded-sm bg-white px-7 py-5 shadow-[0_12px_36px_rgba(0,0,0,0.1)]"
-              style={{ minWidth: 160 }}
-            >
-              <div className="flex gap-1 mb-2">
-                {[0, 1, 2, 3, 4].map((i) => <StarIcon key={i} size={11} />)}
-              </div>
-              <p className="text-xl text-[#2D6A4F]" style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 400 }}>500+ Clients</p>
-              <p className="text-[0.6rem] tracking-[0.2em] uppercase text-[#7A7370] mt-0.5" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300 }}>8+ Years Experience</p>
-            </div>
           </div>
         </div>
 
@@ -328,7 +308,7 @@ export default function HomePage() {
               What We Offer
             </p>
             <h2
-              className="text-[2.8rem] sm:text-[3.5rem] text-[#2C2C2C] mb-5"
+              className="text-[2.8rem] sm:text-[3.5rem] text-[#2C2C2C] mb-14 sm:mb-16"
               style={{ fontFamily: "'Cormorant Garamond', serif" }}
             >
               Our Treatments
@@ -393,19 +373,15 @@ export default function HomePage() {
 
           {/* Photo */}
           <FadeIn>
-            <div className="relative" style={{ paddingBottom: '2rem' }}>
-              <div className="aspect-[4/5] relative overflow-hidden rounded-sm shadow-[0_22px_56px_rgba(35,35,35,0.14)]">
+            <div className="mx-auto max-w-xl lg:max-w-none">
+              <div className="aspect-[16/11] sm:aspect-[16/10] relative overflow-hidden rounded-sm shadow-[0_22px_56px_rgba(35,35,35,0.14)]">
                 <Image
-                  src={olenaImg}
-                  alt="Olena — Aesthetic Specialist"
+                  src={skinBeforeAfterImg}
+                  alt="Client skin rejuvenation — before and after comparison"
                   fill
                   className="object-cover object-center"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
-              </div>
-              <div className="absolute -bottom-2 -right-2 sm:-bottom-0 sm:-right-6 bg-[#2D6A4F] text-white px-6 py-4 z-10">
-                <p className="text-2xl" style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 400 }}>8+</p>
-                <p className="text-[0.58rem] tracking-widest uppercase" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300 }}>Years Exp.</p>
               </div>
             </div>
           </FadeIn>
@@ -447,7 +423,7 @@ export default function HomePage() {
       <section className="section-padding" style={{ backgroundColor: '#222222' }}>
         <div className="site-container">
 
-          <FadeIn className="text-center mb-20">
+          <FadeIn className="text-center mb-28 sm:mb-32">
             <p
               className="text-[0.62rem] tracking-[0.28em] uppercase text-[#C9A84C] mb-5"
               style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500 }}
@@ -515,20 +491,11 @@ export default function HomePage() {
 
       {/* ══════════════ CTA ══════════════ */}
       <section
-        className="section-padding relative overflow-hidden"
-        style={{ background: 'linear-gradient(140deg, #2D6A4F 0%, #1B4332 100%)' }}
+        className="section-padding"
+        style={{ backgroundColor: '#1B4332' }}
       >
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            backgroundImage:
-              'radial-gradient(ellipse 55% 55% at 25% 50%, rgba(201,168,76,0.14) 0%, transparent 65%),' +
-              'radial-gradient(ellipse 40% 40% at 75% 50%, rgba(201,168,76,0.07) 0%, transparent 65%)',
-          }}
-        />
-
-        <div className="site-container relative text-center">
-        <FadeIn className="relative mx-auto max-w-xl text-center">
+        <div className="site-container text-center">
+        <FadeIn className="mx-auto max-w-xl">
           <p
             className="text-[0.62rem] tracking-[0.28em] uppercase text-[#C9A84C] mb-5"
             style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500 }}

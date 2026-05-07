@@ -21,7 +21,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           rel="stylesheet"
         />
       </head>
-      <body className="overflow-x-hidden">
+        <body>
         <Header />
         <main className="min-w-0 w-full">{children}</main>
         <Footer />

@@ -44,39 +44,21 @@ const values = [
 export default function AboutPage() {
   return (
     <>
-      <section className="page-hero bg-[#F4EFE8] overflow-hidden">
-        <div className="absolute inset-y-0 right-0 hidden md:block w-[34%] opacity-35">
-          <Image src={olenaImg} alt="" fill sizes="34vw" className="object-cover object-top" aria-hidden="true" />
-          <div className="absolute inset-0 bg-gradient-to-l from-[#F4EFE8]/30 via-[#F4EFE8]/70 to-[#F4EFE8]" />
-        </div>
-        <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 70% 30%, rgba(45,106,79,0.1) 0%, transparent 60%)' }} />
-        <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 w-[420px] h-[420px] rounded-full bg-[radial-gradient(circle,rgba(201,168,76,0.08)_0%,transparent_68%)] pointer-events-none" />
-        <div className="site-container relative text-center">
-          <div className="relative mx-auto max-w-3xl">
-          <p className="text-[0.62rem] tracking-[0.28em] uppercase text-[#C9A84C] mb-5" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500 }}>
-            Get to Know Me
-          </p>
-          <h1 className="text-[2.8rem] sm:text-[3.5rem] text-[#2C2C2C] mb-6" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
-            About <em className="text-[#2D6A4F]">Olena</em>
-          </h1>
+      <section className="page-hero bg-[#F4EFE8]">
+        <div className="site-container text-center">
+          <p className="text-[0.62rem] tracking-[0.28em] uppercase text-[#C9A84C] mb-5" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500 }}>Get to Know Me</p>
+          <h1 className="text-[2.8rem] sm:text-[3.5rem] text-[#2C2C2C] mb-6" style={{ fontFamily: "'Cormorant Garamond', serif" }}>About <em className="text-[#2D6A4F]">Olena</em></h1>
           <div className="gold-divider mb-8" />
-          <p className="text-[1rem] text-[#7A7370] max-w-lg mx-auto" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300, lineHeight: 1.85 }}>
-            Specialist in advanced aesthetic treatments with a passion for helping every client feel their very best.
-          </p>
-          </div>
+          <p className="text-[1rem] text-[#7A7370] max-w-lg mx-auto" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300, lineHeight: 1.85 }}>Specialist in advanced aesthetic treatments with a passion for helping every client feel their very best.</p>
         </div>
       </section>
 
       <section className="section-padding bg-[#F9F6F0]">
         <div className="site-container grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <FadeIn>
-            <div className="relative">
+            <div>
               <div className="aspect-[3/4] relative overflow-hidden shadow-[0_22px_56px_rgba(35,35,35,0.12)]">
                 <Image src={olenaImg} alt="Olena — Aesthetic Specialist" fill className="object-cover object-center" sizes="(max-width: 1024px) 100vw, 50vw" priority />
-              </div>
-              <div className="absolute -bottom-8 -right-8 bg-[#2D6A4F] p-6 text-white hidden sm:block z-10">
-                <p className="text-3xl mb-0.5" style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 400 }}>8+</p>
-                <p className="text-[0.6rem] tracking-widest uppercase" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300 }}>Years of Expertise</p>
               </div>
             </div>
           </FadeIn>
@@ -148,19 +130,19 @@ export default function AboutPage() {
       </section>
 
       <section className="section-padding bg-[#2C2C2C] text-center">
-        <div className="site-container">
-          <FadeIn className="mx-auto max-w-xl">
-          <h2 className="text-[2.4rem] sm:text-[3rem] text-[#F9F6F0] mb-5" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
-            Let&apos;s Work Together
-          </h2>
-          <div className="gold-divider mb-8" />
-          <p className="text-[1rem] text-[#b0a89e] mb-10" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300, lineHeight: 1.85 }}>
-            Ready to start your skin transformation? Book a consultation and let&apos;s create a plan tailored just for you.
-          </p>
-          <Link href="/contact" className="btn btn-gold">
-            Book Now <ArrowRight size={14} />
-          </Link>
-        </FadeIn>
+        <div className="site-container text-center">
+          <FadeIn className="mx-auto w-full max-w-xl text-center">
+            <h2 className="text-[2.4rem] sm:text-[3rem] text-[#F9F6F0] mb-5" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+              Let&apos;s Work Together
+            </h2>
+            <div className="gold-divider mb-8" />
+            <p className="text-[1rem] text-[#b0a89e] mb-10" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300, lineHeight: 1.85 }}>
+              Ready to start your skin transformation? Book a consultation and let&apos;s create a plan tailored just for you.
+            </p>
+            <Link href="/contact" className="btn btn-gold">
+              Book Now <ArrowRight size={14} />
+            </Link>
+          </FadeIn>
         </div>
       </section>
     </>

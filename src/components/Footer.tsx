@@ -35,9 +35,9 @@ const linkStyle = { fontFamily: "'Jost', sans-serif", fontWeight: 300 } as const
 
 export default function Footer() {
   return (
-    <footer style={{ backgroundColor: '#1e1e1e', color: '#F9F6F0' }}>
+    <footer className="pt-28 md:pt-32" style={{ backgroundColor: '#1e1e1e', color: '#F9F6F0' }}>
 
-      <div className="site-container grid grid-cols-1 gap-12 py-20 md:grid-cols-3 md:gap-16">
+      <div className="site-container grid grid-cols-1 gap-12 pb-28 md:grid-cols-3 md:gap-16">
         <div>
           <h3
             className="text-3xl mb-1"

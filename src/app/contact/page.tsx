@@ -1,9 +1,7 @@
 'use client';
 
-import Image from 'next/image';
 import { useState, useEffect, useRef } from 'react';
 import { Phone, Mail, MapPin, Clock, CheckCircle2 } from 'lucide-react';
-import olenaImg from '@/images/olena.jpg';
 
 function InstagramIcon({ size = 14 }: { size?: number }) {
   return (
@@ -71,25 +69,12 @@ export default function ContactPage() {
 
   return (
     <>
-      <section className="page-hero bg-[#F4EFE8] overflow-hidden">
-        <div className="absolute inset-y-0 right-0 hidden md:block w-[34%] opacity-35">
-          <Image src={olenaImg} alt="" fill sizes="34vw" className="object-cover object-top" aria-hidden="true" />
-          <div className="absolute inset-0 bg-gradient-to-l from-[#F4EFE8]/30 via-[#F4EFE8]/70 to-[#F4EFE8]" />
-        </div>
-        <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 30% 60%, rgba(45,106,79,0.12) 0%, transparent 60%)' }} />
-        <div className="site-container relative text-center">
-          <div className="relative mx-auto max-w-3xl">
-          <p className="text-[0.62rem] tracking-[0.28em] uppercase text-[#C9A84C] mb-5" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500 }}>
-            Get in Touch
-          </p>
-          <h1 className="text-[2.8rem] sm:text-[3.5rem] text-[#2C2C2C] mb-6" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
-            Book an <em className="text-[#2D6A4F]">Appointment</em>
-          </h1>
+      <section className="page-hero bg-[#F4EFE8]">
+        <div className="site-container text-center">
+          <p className="text-[0.62rem] tracking-[0.28em] uppercase text-[#C9A84C] mb-5" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500 }}>Get in Touch</p>
+          <h1 className="text-[2.8rem] sm:text-[3.5rem] text-[#2C2C2C] mb-6" style={{ fontFamily: "'Cormorant Garamond', serif" }}>Book an <em className="text-[#2D6A4F]">Appointment</em></h1>
           <div className="gold-divider mb-8" />
-          <p className="text-[1rem] text-[#7A7370] max-w-lg mx-auto" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300, lineHeight: 1.85 }}>
-            Fill in the form below or contact me directly — I will get back to you within 24 hours to confirm your booking.
-          </p>
-          </div>
+          <p className="text-[1rem] text-[#7A7370] max-w-lg mx-auto" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300, lineHeight: 1.85 }}>Fill in the form below or contact me directly — I will get back to you within 24 hours.</p>
         </div>
       </section>
 
@@ -177,7 +162,7 @@ export default function ContactPage() {
 
           <FadeIn delay={150} className="lg:col-span-3">
             {submitted ? (
-              <div className="flex flex-col items-center justify-center h-full min-h-[480px] text-center p-8 sm:p-10 bg-white rounded-xl sm:rounded-none shadow-[0_12px_40px_rgba(0,0,0,0.08)]">
+              <div className="flex flex-col items-center justify-center h-full min-h-[480px] text-center p-8 sm:p-10 rounded-xl sm:rounded-none shadow-[0_12px_40px_rgba(0,0,0,0.08)]">
                 <div className="w-16 h-16 rounded-full bg-[#2D6A4F]/12 flex items-center justify-center mb-6">
                   <CheckCircle2 size={28} className="text-[#2D6A4F]" />
                 </div>
@@ -190,7 +175,7 @@ export default function ContactPage() {
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="bg-white p-6 sm:p-10 space-y-5 rounded-xl sm:rounded-none shadow-[0_12px_40px_rgba(0,0,0,0.07)]">
+              <form onSubmit={handleSubmit} className="p-6 sm:p-10 space-y-5 rounded-xl sm:rounded-none shadow-[0_12px_40px_rgba(0,0,0,0.07)]">
                 <h2 className="text-[1.8rem] text-[#2C2C2C] mb-6" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
                   Booking Enquiry
                 </h2>
