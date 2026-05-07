@@ -159,12 +159,7 @@ export default function HomePage() {
               }}
             >
               <span className="h-px w-10 bg-[#C9A84C]" />
-              <span
-                className="text-[0.62rem] tracking-[0.28em] uppercase text-[#2D6A4F]"
-                style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500 }}
-              >
-                Advanced Aesthetic Treatments
-              </span>
+
             </div>
 
             <h1
@@ -277,22 +272,22 @@ export default function HomePage() {
       <section className="bg-[#F9F6F0] py-7">
         <div className="site-container">
           <div className="mx-auto flex max-w-4xl flex-col items-center justify-center gap-6 sm:flex-row sm:gap-20">
-          {[
-            { label: 'Advanced Technology', Icon: SparkleIcon },
-            { label: 'Certified Specialist', Icon: ShieldIcon },
-            { label: 'Personalised Care',   Icon: HeartIcon  },
-          ].map(({ label, Icon }) => (
-            <div key={label} className="flex items-center gap-2.5" style={{ color: '#2D6A4F' }}>
-              <span><Icon /></span>
-              <span
-                className="text-[0.65rem] tracking-[0.2em] uppercase"
-                style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500, color: '#2C2C2C' }}
-              >
-                {label}
-              </span>
-            </div>
-          ))}
-        </div>
+            {[
+              { label: 'Advanced Technology', Icon: SparkleIcon },
+              { label: 'Certified Specialist', Icon: ShieldIcon },
+              { label: 'Personalised Care', Icon: HeartIcon },
+            ].map(({ label, Icon }) => (
+              <div key={label} className="flex items-center gap-2.5" style={{ color: '#2D6A4F' }}>
+                <span><Icon /></span>
+                <span
+                  className="text-[0.65rem] tracking-[0.2em] uppercase"
+                  style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500, color: '#2C2C2C' }}
+                >
+                  {label}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -495,30 +490,30 @@ export default function HomePage() {
         style={{ backgroundColor: '#1B4332' }}
       >
         <div className="site-container text-center">
-        <FadeIn className="mx-auto max-w-xl">
-          <p
-            className="text-[0.62rem] tracking-[0.28em] uppercase text-[#C9A84C] mb-5"
-            style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500 }}
-          >
-            Ready to Begin?
-          </p>
-          <h2
-            className="text-[2.8rem] sm:text-[3.5rem] text-white mb-6"
-            style={{ fontFamily: "'Cormorant Garamond', serif" }}
-          >
-            Start Your Skin Journey Today
-          </h2>
-          <div className="gold-divider mb-10" />
-          <p
-            className="text-[1rem] mb-12"
-            style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300, lineHeight: 1.85, color: 'rgba(255,255,255,0.65)' }}
-          >
-            Book a personalised consultation and let us create the perfect treatment plan for your unique skin goals.
-          </p>
-          <Link href="/contact" className="btn btn-gold">
-            Book Your Consultation <ArrowRight size={13} />
-          </Link>
-        </FadeIn>
+          <FadeIn className="mx-auto max-w-xl">
+            <p
+              className="text-[0.62rem] tracking-[0.28em] uppercase text-[#C9A84C] mb-5"
+              style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500 }}
+            >
+              Ready to Begin?
+            </p>
+            <h2
+              className="text-[2.8rem] sm:text-[3.5rem] text-white mb-6"
+              style={{ fontFamily: "'Cormorant Garamond', serif" }}
+            >
+              Start Your Skin Journey Today
+            </h2>
+            <div className="gold-divider mb-10" />
+            <p
+              className="text-[1rem] mb-12"
+              style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300, lineHeight: 1.85, color: 'rgba(255,255,255,0.65)' }}
+            >
+              Book a personalised consultation and let us create the perfect treatment plan for your unique skin goals.
+            </p>
+            <Link href="/contact" className="btn btn-gold">
+              Book Your Consultation <ArrowRight size={13} />
+            </Link>
+          </FadeIn>
         </div>
       </section>
     </>

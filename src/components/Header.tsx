@@ -18,6 +18,7 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
+  const isHome = pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -37,10 +38,15 @@ export default function Header() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
-            ? 'bg-[#F9F6F0]/95 backdrop-blur-sm shadow-[0_4px_24px_rgba(0,0,0,0.05)]'
-            : 'bg-transparent'
-          }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          isHome
+            ? scrolled
+              ? 'bg-[#F4EFE8] shadow-[0_4px_24px_rgba(0,0,0,0.05)]'
+              : 'bg-[#F4EFE8]'
+            : scrolled
+              ? 'bg-[#F9F6F0]/95 backdrop-blur-sm shadow-[0_4px_24px_rgba(0,0,0,0.05)]'
+              : 'bg-transparent'
+        }`}
       >
         <div className="site-container flex h-20 items-center justify-between">
           {/* Logo */}
