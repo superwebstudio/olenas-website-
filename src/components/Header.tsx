@@ -2,8 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
+import logoImg from '@/images/logo.png';
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -50,19 +52,28 @@ export default function Header() {
       >
         <div className="site-container flex h-20 items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex flex-col leading-none group">
-            <span
-              className="text-[1.65rem] text-[#2C2C2C] tracking-wide transition-colors group-hover:text-[#2D6A4F]"
-              style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 400 }}
-            >
-              Olena
-            </span>
-            <span
-              className="text-[0.6rem] tracking-[0.25em] text-[#C9A84C] uppercase"
-              style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500 }}
-            >
-              Aesthetics
-            </span>
+          <Link href="/" className="flex items-center gap-3 leading-none group">
+            <Image
+              src={logoImg}
+              alt="Olena Aesthetics Logo"
+              width={38}
+              height={38}
+              className="shrink-0 transition-opacity duration-200 group-hover:opacity-80"
+            />
+            <div className="flex flex-col">
+              <span
+                className="text-[1.2rem] sm:text-[1.5rem] text-[#2C2C2C] tracking-wide transition-colors group-hover:text-[#2D6A4F]"
+                style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 400 }}
+              >
+                Olena Shevchenko
+              </span>
+              <span
+                className="text-[0.6rem] tracking-[0.25em] text-[#C9A84C] uppercase"
+                style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500 }}
+              >
+                Aesthetics
+              </span>
+            </div>
           </Link>
 
           {/* Desktop nav */}

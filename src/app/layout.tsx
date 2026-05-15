@@ -4,10 +4,11 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'Olena Aesthetics | Laser Hair Removal & Skin Treatments Southampton',
+  title: 'Olena Shevchenko Aesthetics | Microdermabrasion, RF Microneedling & Laser Southampton',
   description:
-    'Professional aesthetic treatments in Southampton — laser hair removal, RF microneedling, tattoo removal and carbon peeling. Book your appointment today.',
-  keywords: 'laser hair removal Southampton, RF microneedling, tattoo removal, carbon peeling, Hollywood peel, aesthetics Southampton, Olena Shevchenko',
+    'Microdermabrasion, RF microneedling and laser hair removal in Southampton — singles and packages. Consultation with Olena Shevchenko.',
+  keywords:
+    'microdermabrasion Southampton, RF microneedling, laser hair removal, skin packages, aesthetics Southampton, Olena Shevchenko',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

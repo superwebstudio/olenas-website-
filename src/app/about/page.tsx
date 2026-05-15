@@ -28,7 +28,7 @@ function FadeIn({ children, delay = 0, className = '' }: { children: React.React
 
 const credentials = [
   'Certified Aesthetic Therapist',
-  'Advanced Laser Technician',
+  'Advanced Skin & RF Practitioner',
   'Skin Health Specialist',
   'Ongoing CPD — latest techniques & technologies',
   'Member of the Irish Beauty Industry Association',
@@ -47,7 +47,7 @@ export default function AboutPage() {
       <section className="page-hero bg-[#F4EFE8]">
         <div className="site-container text-center">
           <p className="text-[0.62rem] tracking-[0.28em] uppercase text-[#C9A84C] mb-5" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500 }}>Get to Know Me</p>
-          <h1 className="text-[2.8rem] sm:text-[3.5rem] text-[#2C2C2C] mb-6" style={{ fontFamily: "'Cormorant Garamond', serif" }}>About <em className="text-[#2D6A4F]">Olena</em></h1>
+          <h1 className="text-[2.8rem] sm:text-[3.5rem] text-[#2C2C2C] mb-6" style={{ fontFamily: "'Cormorant Garamond', serif" }}>About <em className="text-[#2D6A4F]">Olena Shevchenko</em></h1>
           <div className="gold-divider mb-8" />
           <p className="text-[1rem] text-[#7A7370] max-w-lg mx-auto" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300, lineHeight: 1.85 }}>Specialist in advanced aesthetic treatments with a passion for helping every client feel their very best.</p>
         </div>
@@ -58,7 +58,7 @@ export default function AboutPage() {
           <FadeIn>
             <div>
               <div className="aspect-[3/4] relative overflow-hidden shadow-[0_22px_56px_rgba(35,35,35,0.12)]">
-                <Image src={olenaImg} alt="Olena — Aesthetic Specialist" fill className="object-cover object-center" sizes="(max-width: 1024px) 100vw, 50vw" priority />
+                <Image src={olenaImg} alt="Olena Shevchenko — Aesthetic Specialist" fill className="object-cover object-center" sizes="(max-width: 1024px) 100vw, 50vw" priority />
               </div>
             </div>
           </FadeIn>
@@ -76,7 +76,7 @@ export default function AboutPage() {
                 My journey into aesthetics began over eight years ago, driven by a desire to help people feel truly comfortable and confident in their own skin. What started as a fascination with skincare science has grown into a career dedicated to advanced, results-driven treatments.
               </p>
               <p className="text-[1rem] text-[#7A7370]" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300, lineHeight: 1.85 }}>
-                I trained extensively across Ireland and Europe, completing certifications in laser technology, skin health, and aesthetic therapies. I continually invest in furthering my knowledge to ensure my clients receive the very best care.
+                I trained extensively across Ireland and Europe, completing certifications in skin health, RF microneedling and broader aesthetic therapies. I continually invest in furthering my knowledge to ensure my clients receive the very best care.
               </p>
               <p className="text-[1rem] text-[#7A7370]" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300, lineHeight: 1.85 }}>
                 Today, my practice blends clinical precision with a warm, personal touch. Every client who walks through my door is treated as an individual — because great skin care begins with truly listening.

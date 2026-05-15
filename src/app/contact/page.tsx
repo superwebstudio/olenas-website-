@@ -103,8 +103,8 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="text-xs tracking-widest uppercase text-[#7A7370] mb-1" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300 }}>Email</p>
-                    <a href="mailto:hello@olena-aesthetics.ie" className="text-sm text-[#2C2C2C] hover:text-[#2D6A4F] transition-colors" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 400 }}>
-                      hello@olena-aesthetics.ie
+                    <a href="mailto:Elenaunice12@gmail.com" className="text-sm text-[#2C2C2C] hover:text-[#2D6A4F] transition-colors" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 400 }}>
+                      Elenaunice12@gmail.com
                     </a>
                   </div>
                 </li>

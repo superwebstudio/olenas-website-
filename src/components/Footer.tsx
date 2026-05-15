@@ -1,5 +1,7 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Mail, MapPin } from 'lucide-react';
+import logoImg from '@/images/logo.png';
 
 function InstagramIcon() {
   return (
@@ -39,14 +41,17 @@ export default function Footer() {
 
       <div className="site-container grid grid-cols-1 gap-12 pb-28 md:grid-cols-3 md:gap-16">
         <div>
-          <h3
-            className="text-3xl mb-1"
-            style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 400, color: '#F9F6F0' }}
-          >
-            Olena
-          </h3>
+          <div className="flex items-center gap-3 mb-1">
+            <Image src={logoImg} alt="Olena Aesthetics Logo" width={40} height={40} className="shrink-0 opacity-90" />
+            <h3
+              className="text-2xl sm:text-3xl leading-tight"
+              style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 400, color: '#F9F6F0' }}
+            >
+              Olena Shevchenko
+            </h3>
+          </div>
           <p
-            className="mb-7"
+            className="mb-7 ml-[52px]"
             style={{
               fontFamily: "'Jost', sans-serif",
               fontWeight: 500,
@@ -127,8 +132,8 @@ export default function Footer() {
             </li>
             <li className="flex items-start gap-3">
               <Mail size={15} className="mt-0.5 shrink-0 text-[#C9A84C]" />
-              <a href="mailto:hello@olena-aesthetics.ie" className={linkClass} style={linkStyle}>
-                hello@olena-aesthetics.ie
+              <a href="mailto:Elenaunice12@gmail.com" className={linkClass} style={linkStyle}>
+                Elenaunice12@gmail.com
               </a>
             </li>
             <li className="flex items-start gap-3">
@@ -147,7 +152,7 @@ export default function Footer() {
             className="text-xs"
             style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300, color: '#5a5452' }}
           >
-            © {new Date().getFullYear()} Olena Aesthetics. All rights reserved.
+            © {new Date().getFullYear()} Olena Shevchenko Aesthetics. All rights reserved.
           </p>
           <div className="flex gap-6">
             {['Privacy Policy', 'Terms of Service'].map((item) => (

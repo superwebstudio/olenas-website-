@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import olenaImg from '@/images/olena.jpg';
-import skinBeforeAfterImg from '@/images/photo_8_2026-04-29_19-37-15.jpg';
+import olenaProImg from '@/images/olena-professional.png';
 
 /* ─── Inline SVG stars — fill always works ─── */
 function StarIcon({ size = 14, color = '#C9A84C' }: { size?: number; color?: string }) {
@@ -75,24 +75,19 @@ function FadeIn({ children, delay = 0, className = '' }: {
 /* ─── Data ─── */
 const services = [
   {
-    title: 'Laser Hair Removal',
-    description: 'Long-term hair reduction with clinical-grade laser technology — for women and men.',
-    href: '/treatments#laser',
+    title: 'Microdermabrasion',
+    description: 'Professional exfoliation and skin resurfacing — ideal alone or paired with RF in our packages.',
+    href: '/treatments#skin-base-treatment',
   },
   {
     title: 'RF Microneedling',
-    description: 'Non-surgical skin tightening combining radiofrequency and microneedling for collagen stimulation.',
+    description: 'Radiofrequency microneedling for firmness, texture and collagen — zones priced from £130.',
     href: '/treatments#rf-microneedling',
   },
   {
-    title: 'Tattoo Removal',
-    description: 'Professional laser removal of tattoos and permanent makeup, including all sizes and colours.',
-    href: '/treatments#tattoo-removal',
-  },
-  {
-    title: 'Carbon Peeling',
-    description: 'The Hollywood Facial Peel — deep pore cleansing and instant radiance with zero downtime.',
-    href: '/treatments#carbon-peeling',
+    title: 'Laser Hair Removal',
+    description: 'Clinical-grade laser for long-term hair reduction — safe protocols with a trained specialist.',
+    href: '/treatments#laser-hair-removal',
   },
 ];
 
@@ -125,31 +120,45 @@ export default function HomePage() {
   return (
     <>
       {/* ══════════════ HERO ══════════════ */}
-      <section className="relative min-h-screen bg-[#F4EFE8] flex flex-col">
+      <section className="relative min-h-screen flex flex-col overflow-hidden">
 
-        {/* Content grid — image column wider than 50/50 so portrait hero crops less */}
-        <div className="relative flex-1 grid grid-cols-1 lg:grid-cols-12 site-container">
+        {/* Full-bleed background image */}
+        <div
+          className="absolute inset-0"
+          style={{
+            opacity: loaded ? 1 : 0,
+            transition: 'opacity 0.9s ease 0.1s',
+          }}
+        >
+          <Image
+            src={olenaImg}
+            alt="Olena Shevchenko — Aesthetic Specialist"
+            fill
+            className="object-cover object-[center_22%]"
+            sizes="100vw"
+            priority
+          />
+          {/* Mobile overlay — almost opaque on left, fades right */}
+          <div
+            className="absolute inset-0 lg:hidden"
+            style={{
+              background: 'linear-gradient(135deg, rgba(244,239,232,0.96) 0%, rgba(244,239,232,0.88) 55%, rgba(244,239,232,0.45) 100%)',
+            }}
+          />
+          {/* Desktop overlay — strong on left, fades to transparent on right */}
+          <div
+            className="absolute inset-0 hidden lg:block"
+            style={{
+              background: 'linear-gradient(to right, rgba(244,239,232,0.97) 0%, rgba(244,239,232,0.9) 30%, rgba(244,239,232,0.55) 55%, rgba(244,239,232,0.0) 80%)',
+            }}
+          />
+        </div>
 
-          {/* ── Left: Text (+ mobile hero portrait) ── */}
-          <div className="flex flex-col justify-center py-36 lg:py-0 lg:pr-16 lg:col-span-5">
-            <div
-              className="relative w-full aspect-[3/4] max-h-[min(52vh,440px)] mb-10 lg:hidden overflow-hidden shadow-[0_16px_48px_rgba(45,106,79,0.1)]"
-              style={{
-                opacity: loaded ? 1 : 0,
-                transform: loaded ? 'none' : 'translateY(12px)',
-                transition: 'opacity 0.65s ease 0.1s, transform 0.65s ease 0.1s',
-              }}
-            >
-              <Image
-                src={olenaImg}
-                alt="Olena — Aesthetic Specialist"
-                fill
-                className="object-cover object-[center_22%]"
-                sizes="100vw"
-                priority
-              />
-            </div>
-
+        {/* Content — text floats left on top of the bg */}
+        <div className="relative flex-1 flex items-center site-container">
+          <div
+            className="flex flex-col justify-center py-36 lg:py-0 lg:pr-16 w-full lg:max-w-[52%]"
+          >
             <div
               className="inline-flex items-center gap-3 mb-10"
               style={{
@@ -158,8 +167,14 @@ export default function HomePage() {
                 transition: 'opacity 0.55s ease 0.15s, transform 0.55s ease 0.15s',
               }}
             >
+              <span className="text-[#C9A84C]" aria-hidden>✦</span>
               <span className="h-px w-10 bg-[#C9A84C]" />
-
+              <span
+                className="text-[0.62rem] tracking-[0.28em] uppercase text-[#2D6A4F]"
+                style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500 }}
+              >
+                Advanced Aesthetic Treatments
+              </span>
             </div>
 
             <h1
@@ -196,11 +211,11 @@ export default function HomePage() {
                 transition: 'opacity 0.7s ease 0.6s, transform 0.7s ease 0.6s',
               }}
             >
-              Laser hair removal, RF microneedling, tattoo removal and carbon peeling — advanced treatments tailored to help you achieve confident, healthy-looking skin.
+              Microdermabrasion, RF microneedling and laser hair removal — singles and value packages tailored to your goals (see Prices).
             </p>
 
             <div
-              className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-lg mx-auto"
+              className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-lg"
               style={{
                 opacity: loaded ? 1 : 0,
                 transform: loaded ? 'none' : 'translateY(14px)',
@@ -219,40 +234,11 @@ export default function HomePage() {
               </Link>
             </div>
           </div>
-
-          {/* ── Right: Photo (wider column + calmer focal point than object-top) ── */}
-          <div
-            className="relative hidden lg:block lg:col-span-7 min-h-0"
-            style={{
-              opacity: loaded ? 1 : 0,
-              transition: 'opacity 0.9s ease 0.4s',
-            }}
-          >
-            {/* Photo fills full column height, no gap at bottom */}
-            <div className="absolute inset-0 overflow-hidden">
-              <Image
-                src={olenaImg}
-                alt="Olena — Aesthetic Specialist"
-                fill
-                className="object-cover object-[center_22%]"
-                sizes="(max-width: 1280px) 58vw, 52vw"
-                priority
-              />
-              {/* Subtle left-edge fade so photo bleeds into text area softly */}
-              <div
-                className="absolute inset-y-0 left-0 w-24 pointer-events-none"
-                style={{
-                  background: 'linear-gradient(to right, #F4EFE8, transparent)',
-                }}
-              />
-            </div>
-
-          </div>
         </div>
 
-        {/* Scroll cue — below grid, anchored to bottom */}
+        {/* Scroll cue */}
         <div
-          className="flex flex-col items-center gap-2 pb-10 pointer-events-none"
+          className="relative flex flex-col items-center gap-2 pb-10 pointer-events-none"
           style={{
             opacity: loaded ? 0.7 : 0,
             transition: 'opacity 0.6s ease 1.2s',
@@ -269,19 +255,21 @@ export default function HomePage() {
       </section>
 
       {/* ══════════════ TRUST STRIP ══════════════ */}
-      <section className="bg-[#F9F6F0] py-7">
+      <section className="border-y border-[#40916C]/25 bg-[#2D6A4F] py-9">
         <div className="site-container">
-          <div className="mx-auto flex max-w-4xl flex-col items-center justify-center gap-6 sm:flex-row sm:gap-20">
+          <div className="mx-auto flex max-w-4xl flex-col items-center justify-center gap-8 sm:flex-row sm:gap-16 lg:gap-24">
             {[
               { label: 'Advanced Technology', Icon: SparkleIcon },
               { label: 'Certified Specialist', Icon: ShieldIcon },
               { label: 'Personalised Care', Icon: HeartIcon },
             ].map(({ label, Icon }) => (
-              <div key={label} className="flex items-center gap-2.5" style={{ color: '#2D6A4F' }}>
-                <span><Icon /></span>
+              <div key={label} className="flex items-center gap-3 text-[#F9F6F0]">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#F9F6F0]/10 text-[#E8CF7A] ring-1 ring-[#C9A84C]/35">
+                  <Icon />
+                </span>
                 <span
                   className="text-[0.65rem] tracking-[0.2em] uppercase"
-                  style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500, color: '#2C2C2C' }}
+                  style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500, color: '#F9F6F0' }}
                 >
                   {label}
                 </span>
@@ -292,7 +280,7 @@ export default function HomePage() {
       </section>
 
       {/* ══════════════ SERVICES ══════════════ */}
-      <section className="section-padding" style={{ backgroundColor: '#F9F6F0' }}>
+      <section className="section-padding" style={{ backgroundColor: '#F4EFE8' }}>
         <div className="site-container">
 
           <FadeIn className="text-center mb-20">
@@ -311,7 +299,7 @@ export default function HomePage() {
             <div className="gold-divider" />
           </FadeIn>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+          <div className="mx-auto grid max-w-5xl grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 sm:gap-6">
             {services.map((s, i) => (
               <FadeIn key={s.title} delay={i * 90}>
                 <Link
@@ -369,10 +357,10 @@ export default function HomePage() {
           {/* Photo */}
           <FadeIn>
             <div className="mx-auto max-w-xl lg:max-w-none">
-              <div className="aspect-[16/11] sm:aspect-[16/10] relative overflow-hidden rounded-sm shadow-[0_22px_56px_rgba(35,35,35,0.14)]">
+              <div className="aspect-[4/5] sm:aspect-[3/4] lg:aspect-[4/5] relative overflow-hidden rounded-sm shadow-[0_22px_56px_rgba(35,35,35,0.14)]">
                 <Image
-                  src={skinBeforeAfterImg}
-                  alt="Client skin rejuvenation — before and after comparison"
+                  src={olenaProImg}
+                  alt="Olena Shevchenko — Certified Aesthetic Specialist"
                   fill
                   className="object-cover object-center"
                   sizes="(max-width: 1024px) 100vw, 50vw"
@@ -387,7 +375,7 @@ export default function HomePage() {
               className="text-[0.62rem] tracking-[0.28em] uppercase text-[#C9A84C] mb-5"
               style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500 }}
             >
-              About Olena
+              About Olena Shevchenko
             </p>
             <h2
               className="text-[2.6rem] sm:text-[3.2rem] text-[#2C2C2C] mb-6 leading-[1.1]"
@@ -487,7 +475,11 @@ export default function HomePage() {
       {/* ══════════════ CTA ══════════════ */}
       <section
         className="section-padding"
-        style={{ backgroundColor: '#1B4332' }}
+        style={{
+          backgroundColor: '#1B4332',
+          backgroundImage:
+            'radial-gradient(55% 55% at 25% 50%, rgba(201, 168, 76, 0.14) 0%, transparent 65%), radial-gradient(40% 40% at 75% 50%, rgba(201, 168, 76, 0.07) 0%, transparent 65%)',
+        }}
       >
         <div className="site-container text-center">
           <FadeIn className="mx-auto max-w-xl">
