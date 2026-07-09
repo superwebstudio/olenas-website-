@@ -53,15 +53,38 @@ export default function ContactPage() {
   });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    if (error) setError('');
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => { setLoading(false); setSubmitted(true); }, 1200);
+    setError('');
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+
+      const data = (await res.json()) as { error?: string };
+
+      if (!res.ok) {
+        setError(data.error ?? 'Something went wrong. Please try again or email directly.');
+        return;
+      }
+
+      setSubmitted(true);
+    } catch {
+      setError('Could not send your enquiry. Please try again or email Elenaunice12@gmail.com directly.');
+    } finally {
+      setLoading(false);
+    }
   }
 
   const inputClass =
@@ -214,6 +237,12 @@ export default function ContactPage() {
                   <label className="block text-[0.58rem] tracking-[0.18em] uppercase text-[#7A7370] mb-2" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 500 }}>Message / Questions</label>
                   <textarea name="message" value={form.message} onChange={handleChange} rows={4} placeholder="Tell me about your skin concerns or any questions you have…" className={`${inputClass} resize-none`} style={{ fontFamily: "'Jost', sans-serif", fontWeight: 300 }} />
                 </div>
+
+                {error && (
+                  <p className="text-sm text-center text-red-700 bg-red-50 px-4 py-3 rounded-lg" style={{ fontFamily: "'Jost', sans-serif", fontWeight: 400 }}>
+                    {error}
+                  </p>
+                )}
 
                 <button type="submit" disabled={loading} className="btn btn-primary w-full disabled:opacity-60 disabled:cursor-not-allowed">
                   {loading ? 'Sending…' : 'Send Booking Enquiry'}

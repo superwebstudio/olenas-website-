@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
-import olenaImg from '@/images/olena.jpg';
+import heroImg from '@/images/header1.png';
 import olenaProImg from '@/images/olena-professional.png';
 
 /* ─── Inline SVG stars — fill always works ─── */
@@ -131,10 +131,10 @@ export default function HomePage() {
           }}
         >
           <Image
-            src={olenaImg}
+            src={heroImg}
             alt="Olena Shevchenko — Aesthetic Specialist"
             fill
-            className="object-cover object-[center_22%]"
+            className="object-cover object-[72%_center] lg:object-[78%_center]"
             sizes="100vw"
             priority
           />

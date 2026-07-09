@@ -265,8 +265,8 @@ export default function TreatmentsPage() {
               </p>
               <h3 className="mb-10 text-[2.4rem] text-[#2C2C2C]" style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 500 }}>Before &amp; After</h3>
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                <ResultImage src={skinBefore} alt="Skin base treatment — before" label="Before treatment" aspectClassName="aspect-[4/3]" sizes="(max-width: 640px) 100vw, 50vw" />
-                <ResultImage src={skinAfter} alt="Skin base treatment — after" label="After treatment" aspectClassName="aspect-[4/3]" sizes="(max-width: 640px) 100vw, 50vw" />
+                <ResultImage src={skinAfter} alt="Skin base treatment — before" label="Before treatment" aspectClassName="aspect-[4/3]" sizes="(max-width: 640px) 100vw, 50vw" />
+                <ResultImage src={skinBefore} alt="Skin base treatment — after" label="After treatment" aspectClassName="aspect-[4/3]" sizes="(max-width: 640px) 100vw, 50vw" />
               </div>
             </div>
           </FadeIn>
