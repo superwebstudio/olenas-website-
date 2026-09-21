@@ -18,6 +18,10 @@ function escapeHtml(value: string) {
     .replaceAll('"', '&quot;');
 }
 
+function formatMultiline(value: string) {
+  return escapeHtml(value).replaceAll('\n', '<br>');
+}
+
 export async function POST(request: Request) {
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.BOOKING_EMAIL ?? 'tech@superweb.studio';
@@ -49,32 +53,83 @@ export async function POST(request: Request) {
   const preferred = body.preferred?.trim() || 'Not specified';
   const message = body.message?.trim() || 'No message';
 
+  const safeName = escapeHtml(name);
+  const safeEmail = escapeHtml(email);
+  const safePhone = escapeHtml(phone);
+  const safeTreatment = escapeHtml(treatment);
+  const safePreferred = escapeHtml(preferred);
+  const safeMessage = formatMultiline(message);
+
+  const enquiryDetailsHtml = `
+    <table style="font-family: sans-serif; font-size: 14px; line-height: 1.6; color: #2C2C2C; width: 100%;">
+      <tr><td style="padding: 6px 16px 6px 0; color: #7A7370; vertical-align: top;">Name</td><td>${safeName}</td></tr>
+      <tr><td style="padding: 6px 16px 6px 0; color: #7A7370; vertical-align: top;">Email</td><td>${safeEmail}</td></tr>
+      <tr><td style="padding: 6px 16px 6px 0; color: #7A7370; vertical-align: top;">Phone</td><td>${safePhone}</td></tr>
+      <tr><td style="padding: 6px 16px 6px 0; color: #7A7370; vertical-align: top;">Service</td><td>${safeTreatment}</td></tr>
+      <tr><td style="padding: 6px 16px 6px 0; color: #7A7370; vertical-align: top;">Preferred day / time</td><td>${safePreferred}</td></tr>
+      <tr><td style="padding: 6px 16px 6px 0; color: #7A7370; vertical-align: top;">Message</td><td>${safeMessage}</td></tr>
+    </table>
+  `;
+
   const resend = new Resend(apiKey);
 
-  const { error } = await resend.emails.send({
+  const { error: notifyError } = await resend.emails.send({
     from,
     to: [to],
     replyTo: email,
     subject: `Booking enquiry from ${name}`,
     html: `
       <h2 style="font-family: Georgia, serif; color: #2D6A4F;">New booking enquiry</h2>
-      <table style="font-family: sans-serif; font-size: 14px; line-height: 1.6; color: #2C2C2C;">
-        <tr><td style="padding: 6px 16px 6px 0; color: #7A7370;">Name</td><td>${escapeHtml(name)}</td></tr>
-        <tr><td style="padding: 6px 16px 6px 0; color: #7A7370;">Email</td><td>${escapeHtml(email)}</td></tr>
-        <tr><td style="padding: 6px 16px 6px 0; color: #7A7370;">Phone</td><td>${escapeHtml(phone)}</td></tr>
-        <tr><td style="padding: 6px 16px 6px 0; color: #7A7370;">Treatment</td><td>${escapeHtml(treatment)}</td></tr>
-        <tr><td style="padding: 6px 16px 6px 0; color: #7A7370;">Preferred time</td><td>${escapeHtml(preferred)}</td></tr>
-        <tr><td style="padding: 6px 16px 6px 0; color: #7A7370; vertical-align: top;">Message</td><td>${escapeHtml(message).replaceAll('\n', '<br>')}</td></tr>
-      </table>
+      ${enquiryDetailsHtml}
     `,
   });
 
-  if (error) {
-    console.error('Resend error:', error);
+  if (notifyError) {
+    console.error('Resend notify error:', notifyError);
     return NextResponse.json(
-      { error: error.message ?? 'Failed to send enquiry email' },
+      { error: notifyError.message ?? 'Failed to send enquiry email' },
       { status: 500 }
     );
+  }
+
+  const { error: ackError } = await resend.emails.send({
+    from,
+    to: [email],
+    subject: "We've received your enquiry",
+    html: `
+      <div style="font-family: sans-serif; font-size: 14px; line-height: 1.7; color: #2C2C2C; max-width: 560px;">
+        <h2 style="font-family: Georgia, serif; color: #2D6A4F; font-weight: 400; margin: 0 0 16px;">
+          We've received your enquiry
+        </h2>
+
+        <p style="margin: 0 0 12px;">Hi ${safeName},</p>
+
+        <p style="margin: 0 0 12px;">
+          Thank you for getting in touch with Shevchenko Aesthetics.
+          We've received your enquiry and will get back to you as soon as possible.
+        </p>
+
+        <h3 style="font-family: Georgia, serif; color: #2C2C2C; font-weight: 400; font-size: 18px; margin: 24px 0 12px;">
+          Your enquiry
+        </h3>
+
+        ${enquiryDetailsHtml}
+
+        <p style="margin: 24px 0 12px;">
+          Please keep this email for your records. We'll be in touch shortly regarding your enquiry.
+        </p>
+
+        <p style="margin: 0;">
+          Kind regards,<br>
+          <strong>Shevchenko Aesthetics</strong>
+        </p>
+      </div>
+    `,
+  });
+
+  if (ackError) {
+    // Business notification already sent — don't fail the enquiry for the client.
+    console.error('Resend acknowledgement error:', ackError);
   }
 
   return NextResponse.json({ success: true });
