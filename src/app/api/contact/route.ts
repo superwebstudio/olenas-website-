@@ -22,7 +22,7 @@ export async function POST(request: Request) {
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.BOOKING_EMAIL ?? 'tech@superweb.studio';
   const from =
-    process.env.RESEND_FROM_EMAIL ?? 'Olena Aesthetics <onboarding@resend.dev>';
+    process.env.RESEND_FROM_EMAIL ?? 'Shevchenko Aesthetics <hello@shevchenkoaesthetics.com>';
 
   if (!apiKey) {
     return NextResponse.json(
