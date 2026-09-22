@@ -4,11 +4,36 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://shevchenkoaesthetics.com'),
   title: 'Olena Shevchenko Aesthetics | Microdermabrasion, RF Microneedling & Laser Southampton',
   description:
     'Microdermabrasion, RF microneedling and laser hair removal in Southampton — singles and packages. Consultation with Olena Shevchenko.',
   keywords:
     'microdermabrasion Southampton, RF microneedling, laser hair removal, skin packages, aesthetics Southampton, Olena Shevchenko',
+  openGraph: {
+    title: 'Olena Shevchenko Aesthetics',
+    description:
+      'Microdermabrasion, RF microneedling and laser hair removal in Southampton.',
+    url: 'https://shevchenkoaesthetics.com',
+    siteName: 'Olena Shevchenko Aesthetics',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 670,
+        alt: 'Olena Shevchenko Aesthetics — Reveal Your Natural Beauty',
+      },
+    ],
+    type: 'website',
+    locale: 'en_GB',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Olena Shevchenko Aesthetics',
+    description:
+      'Microdermabrasion, RF microneedling and laser hair removal in Southampton.',
+    images: ['/og-image.png'],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
